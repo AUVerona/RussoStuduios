@@ -6,16 +6,12 @@ interface GalleryAlbumProps {
   description: string;
   cover: string;
   images?: string[];
-  videos?: string[];
   folder: string;
 }
 
-export default function GalleryAlbum({ title, description, cover, images = [], videos = [], folder }: GalleryAlbumProps) {
+export default function GalleryAlbum({ title, description, cover, images = [], folder }: GalleryAlbumProps) {
   const [open, setOpen] = useState(false);
-  const media = [
-    ...(images?.map(img => ({ type: "image", src: folder + img })) || []),
-    ...(videos?.map(vid => ({ type: "video", src: folder + vid })) || []),
-  ];
+  const media = images?.map(img => ({ type: "image", src: folder + img })) || [];
 
   return (
     <>
@@ -44,23 +40,14 @@ export default function GalleryAlbum({ title, description, cover, images = [], v
             </button>
             <h2 className="text-3xl font-extrabold text-neutral-900 mb-6 text-center">{title}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {media.map((m, idx) =>
-                m.type === "image" ? (
-                  <img
-                    key={m.src}
-                    src={m.src}
-                    alt={title + " " + (idx + 1)}
-                    className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-                  />
-                ) : (
-                  <video
-                    key={m.src}
-                    src={m.src}
-                    className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-                    controls
-                  />
-                )
-              )}
+              {media.map((m, idx) => (
+                <img
+                  key={m.src}
+                  src={m.src}
+                  alt={title + " " + (idx + 1)}
+                  className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                />
+              ))}
             </div>
           </div>
         </div>
