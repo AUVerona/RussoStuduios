@@ -1,3 +1,22 @@
+# Russo Studios
+
+Sito fotografico moderno realizzato con Next.js e React, ottimizzato per Vercel.
+
+## Deploy su Vercel
+
+1. Assicurati che la struttura sia corretta e che tutte le immagini siano nella cartella `public`.
+2. Effettua il push su GitHub.
+3. Collega la repository a Vercel e seleziona la cartella `workplace` come root del progetto.
+4. Vercel rileverà automaticamente Next.js e compilerà il sito.
+
+## Configurazione
+- File `.env.local` per variabili ambiente
+- File `vercel.json` per routing e build
+
+## Comandi principali
+- `npm run dev` per sviluppo locale
+- `npm run build` per build di produzione
+- `npm start` per avviare la build
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
