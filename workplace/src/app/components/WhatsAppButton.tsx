@@ -3,7 +3,7 @@ import React from "react";
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/393491234567" // Sostituisci con il tuo numero
+          href="https://wa.me/393351065498" // Sostituisci con il tuo numero
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-8 right-8 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center px-5 py-3 font-bold text-lg transition-all"
