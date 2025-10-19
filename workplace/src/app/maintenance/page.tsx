@@ -7,10 +7,16 @@ export default function MaintenancePage() {
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-black px-4">
       <main className="flex-1 w-full flex flex-col items-center justify-center">
         <LogoMaintenance />
-        <h1 className="text-4xl sm:text-6xl font-extrabold text-white mt-10 text-center flex items-center justify-center leading-tight">
-          Sito in manutenzione
-          <span className="ml-2 sm:ml-4 animate-ellipsis text-4xl sm:text-6xl">&nbsp;<span>.</span><span>.</span><span>.</span></span>
-        </h1>
+  {/* Mobile: scritta piccola, puntini sotto; Desktop: scritta grande, puntini a fianco */}
+  <div className="flex flex-col items-center w-full mt-0 sm:mt-6">
+  <h1 className="text-xl sm:text-6xl font-extrabold text-white -mt-10 sm:mt-4 text-center flex flex-col sm:flex-row items-center justify-center leading-tight">
+      <span>Sito in manutenzione</span>
+      {/* Puntini a fianco solo su desktop */}
+      <span className="hidden sm:inline ml-4 animate-ellipsis text-6xl">&nbsp;<span>.</span><span>.</span><span>.</span></span>
+    </h1>
+    {/* Puntini sotto solo su mobile */}
+    <span className="block sm:hidden animate-ellipsis text-3xl mt-1">&nbsp;<span>.</span><span>.</span><span>.</span></span>
+  </div>
         <style jsx>{`
           @keyframes ellipsis {
             0% { opacity: 0; }

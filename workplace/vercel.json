@@ -6,6 +6,7 @@
   "routes": [
   { "src": "/_next/static/(.*)", "dest": "/_next/static/$1" },
   { "src": "/_next/image/(.*)", "dest": "/_next/image/$1" },
-  { "src": "/(?!_next/|favicon.ico|manifest.json|robots.txt|vercel.svg|logo.*|.*\\.png|.*\\.jpg|.*\\.webp|.*\\.svg$).*", "status": 301, "dest": "/maintenance" }
+  { "src": "/maintenance", "dest": "/maintenance" },
+  { "src": "/(?!_next/|favicon.ico|manifest.json|robots.txt|vercel.svg|logo.*|.*\\.png|.*\\.jpg|.*\\.webp|.*\\.svg$|maintenance$).*", "status": 301, "dest": "/maintenance" }
   ]
 }
