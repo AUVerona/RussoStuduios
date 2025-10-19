@@ -4,6 +4,7 @@
     { "src": "package.json", "use": "@vercel/next" }
   ],
   "routes": [
-    { "src": "/.*", "dest": "/maintenance" }
+    { "src": "/_next/static/(.*)", "dest": "/_next/static/$1" },
+    { "src": "/_next/image/(.*)", "dest": "/_next/image/$1" }
   ]
 }
