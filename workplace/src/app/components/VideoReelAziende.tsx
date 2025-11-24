@@ -3,9 +3,9 @@ import React from "react";
 
 export default function VideoReelAziende() {
   const videos = [
-    "/FOTO/bgvideo1.mov",
-    "/FOTO/bgvideo1.mov",
-    "/FOTO/bgvideo1.mov",
+  "/FOTO/bgvideo1.mp4",
+  "/FOTO/bgvideo1.mp4",
+  "/FOTO/bgvideo1.mp4",
   ];
   return (
     <section className="relative w-full min-h-[600px] bg-[#262626] flex items-center justify-center py-24">

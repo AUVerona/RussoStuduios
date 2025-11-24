@@ -25,14 +25,19 @@ export default function HeroSection() {
           playsInline
           preload="auto"
           className="w-full h-full object-cover"
-          src="/FOTO/bgvideo1.mov"
+          src="/FOTO/bgvideo1.mp4"
           style={{ backgroundColor: '#262626' }}
         />
       </div>
       
 
       
-
+      {/* Scritte scorrevoli in alto */}
+  <div className="absolute top-24 left-0 w-full overflow-hidden z-20" style={{background: '#262626'}}>
+        <div className="whitespace-nowrap animate-scroll-text text-white text-lg font-light tracking-widest uppercase">
+          Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista
+        </div>
+      </div>
       
       {/* Logo al centro */}
   <div className="relative z-20 flex flex-col items-center">

@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 
 // Small grid of looping video reels used as background for each block.
-// Videos are currently placeholders (bgvideo1.mov) located in /public/FOTO.
+// Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
 
 export default function VideoReelDisco() {
   // placeholder reels currently all use the same video file
@@ -30,7 +30,7 @@ export default function VideoReelDisco() {
       </div>
       {/* Video background assoluto */}
       <video
-        src="/FOTO/bgvideo1.mov"
+  src="/FOTO/bgvideo1.mp4"
         autoPlay
         loop
         muted
