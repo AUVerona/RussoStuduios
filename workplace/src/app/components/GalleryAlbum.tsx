@@ -1,5 +1,7 @@
 "use client";
+
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface GalleryAlbumProps {
   title: string;
@@ -23,7 +25,15 @@ export default function GalleryAlbum({ title, description, cover, images = [], f
         {cover.endsWith(".mp4") || cover.endsWith(".mov") ? (
           <video src={cover} className="w-full h-48 object-cover mb-4 rounded-lg" autoPlay loop muted playsInline />
         ) : (
-          <img src={cover} alt={title} className="w-full h-48 object-cover mb-4 rounded-lg" />
+          <Image
+            src={cover}
+            alt={title}
+            width={400}
+            height={192}
+            className="w-full h-48 object-cover mb-4 rounded-lg"
+            unoptimized={false}
+            priority={false}
+          />
         )}
         <h3 className="text-2xl font-bold text-neutral-900 mb-2">{title}</h3>
         <p className="text-neutral-700 mb-2 text-center">{description}</p>
@@ -41,11 +51,15 @@ export default function GalleryAlbum({ title, description, cover, images = [], f
             <h2 className="text-3xl font-extrabold text-neutral-900 mb-6 text-center">{title}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {media.map((m, idx) => (
-                <img
+                <Image
                   key={m.src}
                   src={m.src}
                   alt={title + " " + (idx + 1)}
+                  width={400}
+                  height={192}
                   className="w-full h-48 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                  unoptimized={false}
+                  priority={false}
                 />
               ))}
             </div>

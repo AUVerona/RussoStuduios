@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 html {
   scroll-behavior: smooth;
 }
@@ -13,7 +15,6 @@ html {
 ::-webkit-scrollbar-track {
   background: none;
 }
-@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -35,11 +36,51 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: #262626 !important;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial Narrow', 'Helvetica Narrow', 'Pragati Narrow', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .test-bg-red {
   background-color: red !important;
+}
+
+/* Scrolling marquee animation used by HeroSection and Navbar */
+@keyframes scroll-text {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-text {
+  animation: scroll-text 20s linear infinite;
+  display: inline-block;
+}
+/* fast variant to make the navbar marquee more visible */
+.animate-scroll-fast {
+  animation-duration: 12s !important;
+}
+/* slow variant for a calmer marquee */
+.animate-scroll-slow {
+  animation-duration: 36s !important;
+}
+/* ultra slow for a very calm marquee */
+.animate-scroll-ultra {
+  animation-duration: 90s !important;
+}
+
+/* Basic marquee helper used by ServicesSection */
+.marquee-inner {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Hide scrollbars but keep scrolling (used on horizontal reel row) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

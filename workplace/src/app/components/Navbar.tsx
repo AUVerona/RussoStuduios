@@ -1,27 +1,41 @@
 "use client";
+
 import React from "react";
 
-const scrollingText = "Russo Studios - Fotografo | Videomaker | Dronista | Servizi | Chi sono | Contatti";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-80 text-white h-20 flex items-center shadow-lg">
-      <div className="overflow-hidden w-full h-full flex items-center">
-        <div
-          className="whitespace-nowrap px-8 font-extrabold text-3xl animate-scroll"
-        >
-          {scrollingText}
+    <div className="fixed top-0 left-0 w-full z-50" style={{background: '#262626'}}>
+      {/* Scritte scorrevoli sopra la navbar */}
+      <div className="w-full overflow-hidden" style={{background: '#262626', height: '44px', display: 'flex', alignItems: 'center'}}>
+  <div className="whitespace-nowrap animate-scroll-text animate-scroll-ultra text-white text-xl md:text-2xl font-extrabold tracking-widest uppercase" style={{lineHeight: '44px'}}>
+          {/* Duplicate the content to ensure a smooth continuous marquee */}
+          <span aria-hidden>
+            DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER -
+          </span>
+          <span aria-hidden>
+            DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER -
+          </span>
+          DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER-DRONISTA-FOTOGRAFO-VIDEOMAKER
         </div>
       </div>
-      <style jsx>{`
-        @keyframes scroll {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-        .animate-scroll {
-          animation: scroll 15s linear infinite;
-        }
-      `}</style>
-    </nav>
+      {/* Navbar classica subito sotto */}
+      <nav className="w-full text-white h-28 flex items-center justify-between px-12 shadow-lg backdrop-blur-sm" style={{background: '#262626'}}>
+        <div className="flex items-center">
+          <img src="/logorussostudios.png" alt="Russo Studios" className="h-12 w-auto mr-8" />
+        </div>
+        <div className="flex items-center gap-10">
+          <a href="#home" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Home</a>
+          <a href="#servizi-discoteche" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Servizi per Discoteche</a>
+          <a href="#concerti" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Concerti</a>
+          <a href="#aziende" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Aziende</a>
+          <a href="#immobiliare" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Immobiliare</a>
+          <a href="#matrimoni" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Matrimoni</a>
+          <a href="#merch" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Merch</a>
+          <a href="#chi-sono" className="text-xl font-medium hover:text-neutral-300 transition uppercase tracking-wider">Chi Sono</a>
+        </div>
+      </nav>
+      {/* animazione spostata in globals.css per evitare hydration mismatch */}
+    </div>
   );
 }

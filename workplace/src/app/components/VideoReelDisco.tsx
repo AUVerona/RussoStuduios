@@ -1,0 +1,66 @@
+"use client";
+import React, { useRef, useState } from "react";
+
+// Small grid of looping video reels used as background for each block.
+// Videos are currently placeholders (bgvideo1.mov) located in /public/FOTO.
+
+export default function VideoReelDisco() {
+  // placeholder reels currently all use the same video file
+  const reels = [1, 2, 3, 4];
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+
+  const rowRef = useRef<HTMLDivElement | null>(null);
+
+  return (
+  <section className="w-full bg-[#262626] py-12 overflow-hidden">
+    <div className="w-full mx-0 px-0">
+        {/* Title removed per request */}
+
+  {/* Keep all four reels on one row and don't wrap; allow horizontal scroll on small screens */}
+  {/* Reel row: no horizontal scroll, edge-to-edge, alternate up/down */}
+  <div ref={rowRef} className="flex items-end w-full px-0 mx-0 gap-6" style={{ touchAction: 'pan-y' }}>
+          {reels.map((r) => (
+            <div
+              key={r}
+              className={
+                "flex flex-col items-center transform " + (r % 2 === 0 ? "-translate-y-6 md:-translate-y-10" : "translate-y-6 md:translate-y-10")
+              }
+              style={{ willChange: "transform" }}
+            >
+              {/* Instagram-like tall reel card: make it rectangular and tall (9:16) and large */}
+              {/* make slightly smaller so all 4 remain inside the page width */}
+              <div
+                className={
+                  "relative rounded-3xl overflow-hidden bg-black shadow-2xl flex-shrink-0 " +
+                  (r % 2 === 0 ? "-translate-y-8 md:-translate-y-16" : "translate-y-8 md:translate-y-16")
+                }
+                style={{ width: '23vw', aspectRatio: '9/16', minWidth: 0, minHeight: 320 }}
+              >
+                <video
+                  src="/FOTO/bgvideo1.mov"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onCanPlay={() => setLoaded((p) => ({ ...p, [r]: true }))}
+                  onError={() => setLoaded((p) => ({ ...p, [r]: false }))}
+                  aria-hidden="true"
+                />
+
+                {/* Show a subtle placeholder overlay if the video isn't ready */}
+                {!loaded[r] && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white text-lg">VIDEO</div>
+                )}
+
+                {/* label removed per request */}
+              </div>
+              {/* Description removed per each reel */}
+            </div>
+          ))}
+  </div>
+      </div>
+    </section>
+  );
+}
