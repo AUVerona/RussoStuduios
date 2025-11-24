@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import VideoReelDisco from "./VideoReelDisco";
-import MarqueeDisco from "./MarqueeDisco";
 
 // Prima riga - prime 9 foto
 const discoPhotosRow1 = [
@@ -79,7 +78,6 @@ export default function DiscoSection() {
             className="flex gap-4 transition-transform duration-100 ease-linear will-change-transform pointer-events-none"
             style={{
               transform: `translateX(${scrollY * 0.3}px)`,
-              marginLeft: '-1200px', // parte molto più a sinistra
             }}
           >
             {/* Ripeti 3 volte per effetto infinito fluido */}
