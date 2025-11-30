@@ -12,10 +12,19 @@ const matrimoniPhotos = [
 
 export default function MatrimoniSection() {
   const [scrollY, setScrollY] = useState(0);
-  
+
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
@@ -31,9 +40,10 @@ export default function MatrimoniSection() {
               key={idx}
               className="relative overflow-hidden rounded-xl shadow-2xl"
               style={{
-                transform: `scale(${1 + scrollY * 0.0002})`,
-                opacity: Math.max(0.5, 1 - scrollY * 0.0005),
-                transition: "all 0.3s ease-out",
+                transform: `scale(${1 + scrollY * 0.00018})`,
+                opacity: Math.max(0.5, 1 - scrollY * 0.0004),
+                willChange: "transform, opacity",
+                transition: "transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
               <img

@@ -8,10 +8,12 @@ html {
 ::-webkit-scrollbar {
   width: 12px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #444 40%, #bbb 100%);
   border-radius: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: none;
 }
@@ -49,21 +51,30 @@ body {
 
 /* Scrolling marquee animation used by HeroSection and Navbar */
 @keyframes scroll-text {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-scroll-text {
   animation: scroll-text 20s linear infinite;
   display: inline-block;
 }
+
 /* fast variant to make the navbar marquee more visible */
 .animate-scroll-fast {
   animation-duration: 12s !important;
 }
+
 /* slow variant for a calmer marquee */
 .animate-scroll-slow {
   animation-duration: 36s !important;
 }
+
 /* ultra slow for a very calm marquee */
 .animate-scroll-ultra {
   animation-duration: 90s !important;
@@ -78,9 +89,51 @@ body {
 
 /* Hide scrollbars but keep scrolling (used on horizontal reel row) */
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 60s linear infinite;
+}
+
+/* Pause animation on hover if desired */
+.hover\:pause:hover {
+  animation-play-state: paused;
 }

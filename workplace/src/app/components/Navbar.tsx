@@ -5,10 +5,10 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <div className="fixed top-0 left-0 w-full z-50" style={{background: '#262626'}}>
+    <div className="fixed top-0 left-0 w-full z-[100]" style={{ background: '#262626' }}>
       {/* Scritte scorrevoli sopra la navbar */}
-      <div className="w-full overflow-hidden" style={{background: '#262626', height: '44px', display: 'flex', alignItems: 'center'}}>
-  <div className="whitespace-nowrap animate-scroll-text animate-scroll-ultra text-white text-xl md:text-2xl font-extrabold tracking-widest uppercase" style={{lineHeight: '44px'}}>
+      <div className="w-full overflow-hidden" style={{ background: '#262626', height: '44px', display: 'flex', alignItems: 'center' }}>
+        <div className="whitespace-nowrap animate-scroll-text animate-scroll-ultra text-white text-xl md:text-2xl font-extrabold tracking-widest uppercase" style={{ lineHeight: '44px' }}>
           {/* Duplicate the content to ensure a smooth continuous marquee */}
           <span aria-hidden>
             DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER - DRONISTA - FOTOGRAFO - VIDEOMAKER -
@@ -20,7 +20,7 @@ export default function Navbar() {
         </div>
       </div>
       {/* Navbar classica subito sotto */}
-      <nav className="w-full text-white h-28 flex items-center justify-between px-12 shadow-lg backdrop-blur-sm" style={{background: '#262626'}}>
+      <nav className="w-full text-white h-28 flex items-center justify-between px-12 shadow-lg backdrop-blur-sm" style={{ background: '#262626' }}>
         <div className="flex items-center">
           <img src="/logorussostudios.png" alt="Russo Studios" className="h-12 w-auto mr-8" />
         </div>

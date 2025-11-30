@@ -1,17 +1,40 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function HeroSection() {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+    let animationFrameId: number;
+
+    const animate = () => {
+      if (marqueeRef.current) {
+        const scrollY = window.scrollY;
+        const speed = 0.5; // Adjust speed as needed
+
+        // Calculate offset based on scroll
+        // Moving left as we scroll down
+        const offset = scrollY * speed;
+
+        // Assuming the content is duplicated (2 copies), we wrap around half the width
+        const width = marqueeRef.current.scrollWidth / 2;
+
+        // Use modulo to create infinite loop effect
+        // We subtract offset from 0. 
+        // We ensure the result is always negative (moving left) and wraps.
+        const x = -(offset % width);
+
+        marqueeRef.current.style.transform = `translateX(${x}px)`;
+      }
+      animationFrameId = requestAnimationFrame(animate);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Start loop
+    animate();
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
@@ -29,18 +52,16 @@ export default function HeroSection() {
           style={{ backgroundColor: '#262626' }}
         />
       </div>
-      
 
-      
       {/* Scritte scorrevoli in alto */}
-  <div className="absolute top-24 left-0 w-full overflow-hidden z-20" style={{background: '#262626'}}>
+      <div className="absolute top-24 left-0 w-full overflow-hidden z-20" style={{ background: '#262626' }}>
         <div className="whitespace-nowrap animate-scroll-text text-white text-lg font-light tracking-widest uppercase">
           Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista
         </div>
       </div>
-      
+
       {/* Logo al centro */}
-  <div className="relative z-20 flex flex-col items-center">
+      <div className="relative z-20 flex flex-col items-center">
         <Image
           src="/logorussostudios.png"
           alt="Russo Studios"
@@ -50,40 +71,46 @@ export default function HeroSection() {
           priority={true}
         />
       </div>
-      
-      {/* RUSSOSTUDIOS© in basso con sfondo nero e movimento scroll */}
+
+      {/* RUSSOSTUDIOS© in basso con sfondo nero e movimento scroll infinito */}
       <div className="absolute bottom-0 left-0 w-full pt-0 pb-0 overflow-hidden z-20">
-        <div style={{background: '#262626', width: '100%', padding: 0, margin: 0, position: 'relative'}}>
-          <div
-            className="whitespace-nowrap text-white font-extrabold uppercase leading-none"
-            style={{
-              fontSize: 'clamp(40px, 8vw, 90px)',
-              transform: `translateX(${-600 + scrollPosition * 0.5}px)`,
-              transition: 'transform 0.1s linear',
-              letterSpacing: '-0.05em',
-              marginTop: 0,
-              marginBottom: 0,
-              lineHeight: 1,
-              paddingBottom: 0,
-              position: 'relative',
-              top: '-15px'
-            }}
-          >
-            {Array(10).fill(null).map((_, i) => (
-              <span key={i}>
-                RUSSOSTUDIOS
-                <sup
-                  className="text-[10px] md:text-[14px] align-super lowercase"
-                  style={{ verticalAlign: 'text-bottom', position: 'relative', top: '-85px', display: 'inline-block', fontWeight: 400 }}
-                >
-                  ©
-                </sup>{' '}
-              </span>
-            ))}
+        <div style={{ background: '#262626', width: '100%', padding: 0, margin: 0, position: 'relative' }}>
+          <div className="flex whitespace-nowrap overflow-hidden">
+            {/* Container for the moving text */}
+            <div ref={marqueeRef} className="flex whitespace-nowrap will-change-transform">
+              {/* First copy */}
+              <div className="flex whitespace-nowrap">
+                {Array(10).fill(null).map((_, i) => (
+                  <span key={i} className="text-white font-extrabold uppercase leading-none mx-4" style={{ fontSize: 'clamp(40px, 8vw, 90px)', letterSpacing: '-0.05em' }}>
+                    RUSSOSTUDIOS
+                    <sup
+                      className="text-[10px] md:text-[14px] align-super lowercase"
+                      style={{ verticalAlign: 'text-bottom', position: 'relative', top: '-0.5em', fontWeight: 400 }}
+                    >
+                      ©
+                    </sup>
+                  </span>
+                ))}
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="flex whitespace-nowrap" aria-hidden="true">
+                {Array(10).fill(null).map((_, i) => (
+                  <span key={`dup-${i}`} className="text-white font-extrabold uppercase leading-none mx-4" style={{ fontSize: 'clamp(40px, 8vw, 90px)', letterSpacing: '-0.05em' }}>
+                    RUSSOSTUDIOS
+                    <sup
+                      className="text-[10px] md:text-[14px] align-super lowercase"
+                      style={{ verticalAlign: 'text-bottom', position: 'relative', top: '-0.5em', fontWeight: 400 }}
+                    >
+                      ©
+                    </sup>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
+
       <style jsx>{`
         @keyframes scroll-text {
           0% { transform: translateX(0); }

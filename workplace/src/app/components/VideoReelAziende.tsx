@@ -3,55 +3,57 @@ import React from "react";
 
 export default function VideoReelAziende() {
   const videos = [
-  "/FOTO/bgvideo1.mp4",
-  "/FOTO/bgvideo1.mp4",
-  "/FOTO/bgvideo1.mp4",
+    "/FOTO/bgvideo1.mp4",
+    "/FOTO/bgvideo1.mp4",
+    "/FOTO/bgvideo1.mp4",
   ];
+
   return (
-    <section className="relative w-full min-h-[600px] bg-[#262626] flex items-center justify-center py-24">
-      <div className="w-full flex flex-row items-end justify-between gap-8 px-8" style={{height: '600px'}}>
-        {/* Video sinistra verticale */}
-        <div className="flex flex-col justify-end" style={{width: '18vw', marginTop: '0px', height: '400px'}}>
+    <section className="relative w-full min-h-screen bg-[#262626] flex items-center justify-center py-24 overflow-hidden">
+      <div className="w-full max-w-[1800px] flex flex-row items-start justify-center gap-4 md:gap-8 px-4 md:px-8">
+
+        {/* Video 1: Sinistra - Verticale - In alto */}
+        <div className="relative w-[25vw] md:w-[20vw] aspect-[9/16] mt-0 transition-transform hover:scale-105 duration-500">
           <video
-            src={videos[0]}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
-            className="rounded-[2rem] shadow-2xl object-cover"
-            style={{ width: '100%', height: '100%', borderRadius: '2rem', background: '#222', objectFit: 'cover' }}
-            aria-hidden="true"
-          />
+            className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
+            style={{ background: '#222' }}
+          >
+            <source src={videos[0]} type="video/mp4" />
+          </video>
         </div>
-        {/* Video centrale orizzontale grande, più basso */}
-        <div className="flex flex-col justify-center" style={{width: '50vw', marginTop: '80px', height: '440px'}}>
+
+        {/* Video 2: Centro - Orizzontale - Scalino 1 */}
+        <div className="relative w-[45vw] md:w-[40vw] aspect-[16/9] mt-24 md:mt-32 transition-transform hover:scale-105 duration-500">
           <video
-            src={videos[1]}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
-            className="rounded-[2rem] shadow-2xl object-cover"
-            style={{ width: '100%', height: '100%', borderRadius: '2rem', background: '#222', objectFit: 'cover' }}
-            aria-hidden="true"
-          />
+            className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
+            style={{ background: '#222' }}
+          >
+            <source src={videos[1]} type="video/mp4" />
+          </video>
         </div>
-        {/* Video destra verticale, ancora più basso */}
-        <div className="flex flex-col justify-end" style={{width: '18vw', marginTop: '160px', height: '400px'}}>
+
+        {/* Video 3: Destra - Verticale - Scalino 2 (più in basso) */}
+        <div className="relative w-[25vw] md:w-[20vw] aspect-[9/16] mt-48 md:mt-64 transition-transform hover:scale-105 duration-500">
           <video
-            src={videos[2]}
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
-            className="rounded-[2rem] shadow-2xl object-cover"
-            style={{ width: '100%', height: '100%', borderRadius: '2rem', background: '#222', objectFit: 'cover' }}
-            aria-hidden="true"
-          />
+            className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
+            style={{ background: '#222' }}
+          >
+            <source src={videos[2]} type="video/mp4" />
+          </video>
         </div>
+
       </div>
     </section>
   );

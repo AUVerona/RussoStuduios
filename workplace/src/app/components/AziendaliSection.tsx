@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
 
-export default function VideoReelDisco() {
+export default function AziendaliSection() {
   // placeholder reels currently all use the same video file
   const images = [
     "/FOTO/FOTO DISCO/1.jpg",
@@ -12,7 +12,6 @@ export default function VideoReelDisco() {
     "/FOTO/FOTO DISCO/3.jpg",
     "/FOTO/FOTO DISCO/4.jpg",
   ];
-  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
 
   const rowRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,14 +22,14 @@ export default function VideoReelDisco() {
       {/* Rettangolo alto */}
       <div className="absolute top-0 left-0 w-full h-24 bg-[#262626] z-20" />
       {/* Scritta DISCO subito dopo il rettangolo alto */}
-  <div className="w-full flex justify-center pointer-events-none overflow-hidden" style={{ position: 'absolute', top: '32px', left: 0, zIndex: 30, marginTop: '0', maxWidth: '100vw', height: '96px' }}>
-        <div className="whitespace-nowrap text-6xl md:text-8xl font-black text-white uppercase opacity-90 animate-none text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1.5rem', maxWidth: '100%', overflow: 'hidden', textOverflow: 'clip', lineHeight: '96px' }}>
+      <div className="w-full flex justify-center pointer-events-none overflow-hidden" style={{ position: 'absolute', top: '32px', left: 0, zIndex: 30, marginTop: '0', maxWidth: '100vw', height: '96px' }}>
+        <div className="whitespace-nowrap text-6xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1.5rem', animation: 'none', lineHeight: '96px' }}>
           DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO
         </div>
       </div>
       {/* Video background assoluto */}
       <video
-  src="/FOTO/bgvideo1.mp4"
+        src="/FOTO/bgvideo1.mp4"
         autoPlay
         loop
         muted
@@ -50,7 +49,7 @@ export default function VideoReelDisco() {
       )}
       <div className="relative w-full mx-0 px-0 z-30">
         {/* Spazio vuoto tra rettangolo alto e immagini */}
-  <div className="w-full" style={{ height: '300px', zIndex: 10, position: 'relative' }} />
+        <div className="w-full" style={{ height: '300px', zIndex: 10, position: 'relative' }} />
         {/* Keep all four reels on one row and don't wrap; allow horizontal scroll on small screens */}
         <div ref={rowRef} className="flex items-end w-full px-0 mx-0 gap-6" style={{ touchAction: 'pan-y' }}>
           {images.map((img, idx) => (
