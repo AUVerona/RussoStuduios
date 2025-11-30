@@ -112,7 +112,7 @@ export default function ServicesSection() {
               />
 
               {/* Overlay scuro */}
-              <div className="absolute inset-0 bg-black bg-opacity-30" />
+              {/* Overlay scuro rimosso */}
 
               {/* Tab bianca con titolo */}
               <div className="absolute top-0 left-0 right-0 bg-white rounded-t-3xl p-8 text-center">
