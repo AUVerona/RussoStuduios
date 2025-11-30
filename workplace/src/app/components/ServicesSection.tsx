@@ -7,27 +7,27 @@ const services = [
   {
     id: "servizi-discoteche",
     title: "SERVIZI PER DISCOTECHE EVENTI",
-    image: "/FOTO/FOTO DISCO/IMG_3612.JPG"
+    image: "/FOTO/FOTO DISCO/1.webp"
   },
   {
     id: "concerti",
     title: "FOTO CONCERTI",
-    image: "/FOTO/CONCERTI/IMG_1056.JPG"
+    image: "/FOTO/CONCERTI/1.webp"
   },
   {
     id: "aziende",
     title: "AZIENDE",
-    image: "/FOTO/FOTO DISCO/IMG_3612.JPG"
+    image: "/FOTO/AZIENDE/1.webp"
   },
   {
     id: "immobiliare",
     title: "IMMOBILIARE",
-    image: "/FOTO/FOTO DISCO/IMG_3612.JPG"
+    image: "/FOTO/AZIENDE/2.webp" // Using another Aziende photo for now as no specific folder
   },
   {
     id: "matrimoni",
     title: "MATRIMONI",
-    image: "/FOTO/MATRIMONI/IMG_0065.JPG"
+    image: "/FOTO/MATRIMONI/1.webp"
   }
 ];
 

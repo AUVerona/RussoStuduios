@@ -13,10 +13,10 @@ export default function AboutMEsection() {
             {/* Scrolling Text Top */}
             <div className="w-full overflow-hidden relative z-10">
                 <div className="animate-marquee whitespace-nowrap flex">
-                    <span className="text-6xl md:text-8xl font-black tracking-tighter uppercase mx-4">
+                    <span className="text-5xl md:text-8xl font-black tracking-tighter uppercase mx-4">
                         {marqueeText}
                     </span>
-                    <span className="text-6xl md:text-8xl font-black tracking-tighter uppercase mx-4">
+                    <span className="text-5xl md:text-8xl font-black tracking-tighter uppercase mx-4">
                         {marqueeText}
                     </span>
                 </div>
@@ -33,16 +33,15 @@ export default function AboutMEsection() {
                     <div className="text-sm md:text-base text-gray-300 leading-relaxed text-justify font-mono break-words">
                         {/* Placeholder text block to match the visual density of the image */}
                         <p>
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
-                            DESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONEDESCRIZIONE
+                            Mi chiamo Diego Russo, classe 2004, e la mia passione per la fotografia e il videomaking è nata quando ero bambino. Nel 2017 ho deciso di buttarmi completamente in questo mondo, iniziando un percorso fatto di studio, sperimentazione e lavoro sul campo.
+                        </p>
+                        <p className="mt-4">
+                            Ad oggi ho diversi anni di esperienza alle spalle, tra eventi, concerti, aziende e progetti personali.
+                            Potrei dirti che ciò che conta sono gli anni di lavoro, l’attrezzatura o le competenze tecniche e in parte è vero ma penso che siano le immagini a parlare davvero per me.
+                        </p>
+                        <p className="mt-4">
+                            russostudios nasce dal bisogno di raccontare emozioni, persone, luoghi ed energie in modo autentico, moderno e curato.
+                            Ogni progetto è un’occasione per dare valore a una storia e trasformarla in immagini che rimangono.
                         </p>
                     </div>
                 </div>
@@ -71,10 +70,10 @@ export default function AboutMEsection() {
             {/* Scrolling Text Bottom */}
             <div className="w-full overflow-hidden relative z-10">
                 <div className="animate-marquee-reverse whitespace-nowrap flex">
-                    <span className="text-6xl md:text-8xl font-black tracking-tighter uppercase mx-4">
+                    <span className="text-5xl md:text-8xl font-black tracking-tighter uppercase mx-4">
                         {marqueeText}
                     </span>
-                    <span className="text-6xl md:text-8xl font-black tracking-tighter uppercase mx-4">
+                    <span className="text-5xl md:text-8xl font-black tracking-tighter uppercase mx-4">
                         {marqueeText}
                     </span>
                 </div>

@@ -5,10 +5,19 @@ import Image from "next/image";
 
 export default function HeroSection() {
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    let animationFrameId: number;
+    // Force video play
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch((err) => {
+        console.error("Video autoplay failed:", err);
+      });
+    }
 
+    // Marquee animation
+    let animationFrameId: number;
     const animate = () => {
       if (marqueeRef.current) {
         const scrollY = window.scrollY;
@@ -22,8 +31,6 @@ export default function HeroSection() {
         const width = marqueeRef.current.scrollWidth / 2;
 
         // Use modulo to create infinite loop effect
-        // We subtract offset from 0. 
-        // We ensure the result is always negative (moving left) and wraps.
         const x = -(offset % width);
 
         marqueeRef.current.style.transform = `translateX(${x}px)`;
@@ -31,26 +38,29 @@ export default function HeroSection() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Start loop
     animate();
 
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
       {/* Video di sfondo */}
-      <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none select-none">
+      <div className="absolute inset-0 w-full h-full z-0">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover"
-          src="/FOTO/bgvideo1.mp4"
-          style={{ backgroundColor: '#262626' }}
-        />
+          poster="/FOTO/AZIENDE/1.webp"
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
+        </video>
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Scritte scorrevoli in alto */}
@@ -81,24 +91,18 @@ export default function HeroSection() {
               {/* First copy */}
               <div className="flex whitespace-nowrap">
                 {Array(10).fill(null).map((_, i) => (
-                  <span key={i} className="text-white font-extrabold uppercase leading-none mx-4" style={{ fontSize: 'clamp(40px, 8vw, 90px)', letterSpacing: '-0.05em' }}>
+                  <span key={i} className="text-white font-extrabold uppercase leading-none mx-2 md:mx-4" style={{ fontSize: 'clamp(32px, 12vw, 90px)', letterSpacing: '-0.05em' }}>
                     RUSSOSTUDIOS
-                    <sup
-                      className="text-[10px] md:text-[14px] align-super lowercase"
-                      style={{ verticalAlign: 'text-bottom', position: 'relative', top: '-0.5em', fontWeight: 400 }}
-                    >
-                      ©
-                    </sup>
                   </span>
                 ))}
               </div>
               {/* Duplicate for seamless loop */}
               <div className="flex whitespace-nowrap" aria-hidden="true">
                 {Array(10).fill(null).map((_, i) => (
-                  <span key={`dup-${i}`} className="text-white font-extrabold uppercase leading-none mx-4" style={{ fontSize: 'clamp(40px, 8vw, 90px)', letterSpacing: '-0.05em' }}>
+                  <span key={`dup-${i}`} className="text-white font-extrabold uppercase leading-none mx-2 md:mx-4" style={{ fontSize: 'clamp(32px, 12vw, 90px)', letterSpacing: '-0.05em' }}>
                     RUSSOSTUDIOS
                     <sup
-                      className="text-[10px] md:text-[14px] align-super lowercase"
+                      className="text-[8px] md:text-[14px] align-super lowercase"
                       style={{ verticalAlign: 'text-bottom', position: 'relative', top: '-0.5em', fontWeight: 400 }}
                     >
                       ©

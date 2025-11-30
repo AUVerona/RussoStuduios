@@ -1,5 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
+import Image from "next/image";
+import LazyVideo from "./LazyVideo";
 
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
@@ -12,13 +14,13 @@ export default function VideoReelDisco() {
   const rowRef = useRef<HTMLDivElement | null>(null);
 
   return (
-  <section className="w-full bg-[#262626] py-12 overflow-hidden">
-    <div className="w-full mx-0 px-0">
+    <section className="w-full bg-[#262626] py-12 overflow-hidden">
+      <div className="w-full mx-0 px-0">
         {/* Title removed per request */}
 
-  {/* Keep all four reels on one row and don't wrap; allow horizontal scroll on small screens */}
-  {/* Reel row: no horizontal scroll, edge-to-edge, alternate up/down */}
-  <div ref={rowRef} className="flex items-end w-full px-0 mx-0 gap-6" style={{ touchAction: 'pan-y' }}>
+        {/* Keep all four reels on one row and don't wrap; allow horizontal scroll on small screens */}
+        {/* Reel row: no horizontal scroll, edge-to-edge, alternate up/down */}
+        <div ref={rowRef} className="flex items-end w-full px-0 mx-0 gap-6" style={{ touchAction: 'pan-y' }}>
           {reels.map((r) => (
             <div
               key={r}
@@ -37,29 +39,21 @@ export default function VideoReelDisco() {
                 style={{ width: '23vw', aspectRatio: '9/16', minWidth: 0, minHeight: 320 }}
               >
                 <video
-                  src="/FOTO/bgvideo1.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
                   className="absolute inset-0 w-full h-full object-cover"
-                  onCanPlay={() => setLoaded((p) => ({ ...p, [r]: true }))}
-                  onError={() => setLoaded((p) => ({ ...p, [r]: false }))}
-                  aria-hidden="true"
-                />
-
-                {/* Show a subtle placeholder overlay if the video isn't ready */}
-                {!loaded[r] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white text-lg">VIDEO</div>
-                )}
+                >
+                  <source src="/FOTO/VIDEO/Disco1.webm" type="video/webm" />
+                </video>
 
                 {/* label removed per request */}
               </div>
               {/* Description removed per each reel */}
             </div>
           ))}
-  </div>
+        </div>
       </div>
     </section>
   );
