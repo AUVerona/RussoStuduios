@@ -54,7 +54,7 @@ export default function HeroSection() {
           muted
           playsInline
           preload="auto"
-          poster="/FOTO/AZIENDE/1.webp"
+          poster="/FOTO/AZIENDE/poster_hero.webp"
           className="w-full h-full object-cover opacity-60"
         >
           <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />

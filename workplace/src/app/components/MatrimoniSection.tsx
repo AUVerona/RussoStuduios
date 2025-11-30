@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 const matrimoniPhotos = [
   "/FOTO/MATRIMONI/1.webp",
@@ -71,22 +72,26 @@ export default function MatrimoniSection() {
                 <div key={idx} className="flex-shrink-0 snap-center h-full">
                   {col.type === 'long' ? (
                     // Long Image Column
-                    <div className="w-[85vw] md:w-[400px] h-full rounded-xl overflow-hidden">
-                      <img
+                    <div className="relative w-[85vw] md:w-[400px] h-full rounded-xl overflow-hidden">
+                      <Image
                         src={col.photos[0]}
                         alt={`Matrimonio Long ${idx}`}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 85vw, 400px"
                       />
                     </div>
                   ) : (
                     // Stacked Column
                     <div className="w-[85vw] md:w-[400px] h-full flex flex-col gap-6">
                       {col.photos.map((photo, pIdx) => (
-                        <div key={pIdx} className="w-full h-1/2 rounded-xl overflow-hidden">
-                          <img
+                        <div key={pIdx} className="relative w-full h-1/2 rounded-xl overflow-hidden">
+                          <Image
                             src={photo}
                             alt={`Matrimonio Stack ${idx}-${pIdx}`}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 85vw, 400px"
                           />
                         </div>
                       ))}
@@ -135,10 +140,14 @@ export default function MatrimoniSection() {
         <div className="flex flex-col gap-4 px-4">
           {matrimoniPhotos.map((photo, idx) => (
             <div key={`mobile-matrimoni-${idx}`} className="w-full rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={photo}
                 alt={`Matrimoni Mobile ${idx}`}
+                width={800}
+                height={600}
                 className="w-full h-auto object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ width: '100%', height: 'auto' }}
               />
             </div>
           ))}

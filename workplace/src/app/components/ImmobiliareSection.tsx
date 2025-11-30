@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
@@ -70,11 +71,13 @@ export default function ImmobiliareSection() {
                                         }
                                         style={{ aspectRatio: '9/10', minWidth: 0, minHeight: 340, marginTop: '-32px', marginBottom: '-32px' }}
                                     >
-                                        <img
+                                        <Image
                                             src={img}
                                             alt={`Immobiliare ${idx + 1}`}
-                                            className="absolute inset-0 w-full h-full object-cover rounded-[5rem]"
+                                            fill
+                                            className="object-cover rounded-[5rem]"
                                             style={{ borderRadius: '5rem' }}
+                                            sizes="(max-width: 768px) 100vw, 25vw"
                                         />
                                     </div>
                                 </div>

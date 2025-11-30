@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
@@ -70,11 +71,13 @@ export default function AziendaliSection() {
                     }
                     style={{ aspectRatio: '9/10', minWidth: 0, minHeight: 340, marginTop: '-32px', marginBottom: '-32px' }}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`Aziendali ${idx + 1}`}
-                      className="absolute inset-0 w-full h-full object-cover rounded-[5rem]"
+                      fill
+                      className="object-cover rounded-[5rem]"
                       style={{ borderRadius: '5rem' }}
+                      sizes="(max-width: 768px) 100vw, 25vw"
                     />
                   </div>
                 </div>
@@ -126,10 +129,12 @@ export default function AziendaliSection() {
           {images.map((img, idx) => (
             <div key={`mobile-aziendali-${idx}`} className="flex justify-center w-full">
               <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg border border-white/10">
-                <img
+                <Image
                   src={img}
                   alt={`Aziendali Mobile ${idx}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
             </div>
