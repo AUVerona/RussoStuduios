@@ -10,41 +10,26 @@ export default function VideoReelAziende() {
 
         {/* Video 1 */}
         <div className="relative w-[80vw] md:w-[25vw] aspect-[9/16] transition-transform hover:scale-105 duration-500">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <LazyVideo
+            src="/FOTO/VIDEO/Azienda1.webm"
             className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
-          >
-            <source src="/FOTO/VIDEO/Azienda1.webm" type="video/webm" />
-          </video>
+          />
         </div>
 
         {/* Video 2 */}
         <div className="relative w-[80vw] md:w-[25vw] aspect-[9/16] transition-transform hover:scale-105 duration-500">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <LazyVideo
+            src="/FOTO/VIDEO/Azienda2.webm"
             className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
-          >
-            <source src="/FOTO/VIDEO/Azienda2.webm" type="video/webm" />
-          </video>
+          />
         </div>
 
         {/* Video 3 */}
         <div className="relative w-[80vw] md:w-[25vw] aspect-[9/16] transition-transform hover:scale-105 duration-500">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <LazyVideo
+            src="/FOTO/VIDEO/Azienda1.webm"
             className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
-          >
-            <source src="/FOTO/VIDEO/Azienda1.webm" type="video/webm" />
-          </video>
+          />
         </div>
 
       </div>

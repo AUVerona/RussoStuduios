@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
+import LazyVideo from "./LazyVideo";
 
 export default function ConcertiSection() {
     const images = [
@@ -87,15 +88,10 @@ export default function ConcertiSection() {
                         <div className="relative w-full h-full overflow-hidden bg-black">
                             {/* Video di sfondo */}
                             <div className="absolute inset-0 w-full h-full z-0">
-                                <video
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
+                                <LazyVideo
+                                    src="/FOTO/VIDEO/videobg1.webm"
                                     className="w-full h-full object-cover"
-                                >
-                                    <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
-                                </video>
+                                />
                             </div>
 
                             {/* Griglia 2 righe di foto infinite */}

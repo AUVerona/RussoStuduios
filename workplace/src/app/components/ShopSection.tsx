@@ -45,7 +45,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/maglia1.png"
+                            src="/tshirt1.png"
                             alt="Russo Studios Tee 01"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
@@ -67,7 +67,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/maglia2.png"
+                            src="/tshirt2.png"
                             alt="Russo Studios Tee 02"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
@@ -89,7 +89,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/maglia1.png"
+                            src="/tshirt1.png"
                             alt="Russo Studios Tee 03"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"

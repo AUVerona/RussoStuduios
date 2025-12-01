@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 
+import LazyVideo from './LazyVideo';
+
 export default function MerchSection() {
     return (
         <section className="relative w-full min-h-screen bg-[#262626] flex flex-col items-center justify-center py-20 z-50">
@@ -8,16 +10,10 @@ export default function MerchSection() {
             {/* Rotated Video Strip Container */}
             {/* The container is rotated, creating the 'frame' effect requested */}
             <div className="absolute w-[150%] h-[60vh] md:h-[70vh] bg-black transform rotate-6 -translate-y-24 flex items-center justify-center overflow-hidden shadow-2xl border-y-4 border-white/10 top-1/2 left-1/2 -translate-x-1/2 -mt-32 z-40">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                <LazyVideo
+                    src="/FOTO/VIDEO/videobg1.webm"
                     className="w-full h-full object-cover opacity-80"
-                >
-                    {/* Placeholder video */}
-                    <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
-                </video>
+                />
             </div>
 
             {/* Content - Horizontal and centered on top */}

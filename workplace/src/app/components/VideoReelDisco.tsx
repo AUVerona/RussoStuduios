@@ -43,15 +43,10 @@ export default function VideoReelDisco() {
                 }
                 style={{ width: '23vw', aspectRatio: '9/16', minWidth: 0, minHeight: 320 }}
               >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                <LazyVideo
+                  src={video.src}
                   className="absolute inset-0 w-full h-full object-cover"
-                >
-                  <source src={video.src} type={video.type} />
-                </video>
+                />
 
                 {/* label removed per request */}
               </div>
