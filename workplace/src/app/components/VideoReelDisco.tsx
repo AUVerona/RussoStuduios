@@ -9,10 +9,10 @@ import LazyVideo from "./LazyVideo";
 export default function VideoReelDisco() {
   // Specific videos for the reel
   const videos = [
-    { src: "/FOTO/VIDEO/Disco1.webm", type: "video/webm" },
-    { src: "/FOTO/VIDEO/Disco2.webm", type: "video/webm" },
-    { src: "/FOTO/VIDEO/Disco3.webm", type: "video/webm" },
-    { src: "/FOTO/VIDEO/Disco4.webm", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco1.webm", poster: "/FOTO/FOTO DISCO/1.webp", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco2.webm", poster: "/FOTO/FOTO DISCO/2.webp", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco3.webm", poster: "/FOTO/FOTO DISCO/3.webp", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco4.webm", poster: "/FOTO/FOTO DISCO/4.webp", type: "video/webm" },
   ];
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
 
@@ -45,7 +45,13 @@ export default function VideoReelDisco() {
               >
                 <LazyVideo
                   src={video.src}
+                  poster={video.poster}
                   className="absolute inset-0 w-full h-full object-cover"
+                  muted
+                  loop
+                  playsInline
+                  unloadOnPause={true}
+                  rootMargin="50px"
                 />
 
                 {/* label removed per request */}

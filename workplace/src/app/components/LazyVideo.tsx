@@ -7,9 +7,10 @@ interface LazyVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
     poster?: string;
     unloadOnPause?: boolean;
     disableOnMobile?: boolean;
+    rootMargin?: string;
 }
 
-export default function LazyVideo({ src, poster, className, style, unloadOnPause = false, disableOnMobile = false, ...props }: LazyVideoProps) {
+export default function LazyVideo({ src, poster, className, style, unloadOnPause = false, disableOnMobile = false, rootMargin = "50px", ...props }: LazyVideoProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isIntersecting, setIsIntersecting] = useState(false);
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -39,7 +40,7 @@ export default function LazyVideo({ src, poster, className, style, unloadOnPause
                 }
             },
             {
-                rootMargin: "300px",
+                rootMargin: rootMargin,
                 threshold: 0.1,
             }
         );
@@ -53,7 +54,7 @@ export default function LazyVideo({ src, poster, className, style, unloadOnPause
                 observer.unobserve(videoRef.current);
             }
         };
-    }, [unloadOnPause, disableOnMobile, isMobile]);
+    }, [unloadOnPause, disableOnMobile, isMobile, rootMargin]);
 
     // Force load when source is added
     useEffect(() => {
