@@ -15,7 +15,7 @@ const ContactSection = dynamic(() => import("./components/ContactSection"));
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-black text-white">
+    <main className="flex min-h-screen flex-col bg-black text-white overflow-x-hidden">
       <div id="home">
         <HeroSection />
       </div>

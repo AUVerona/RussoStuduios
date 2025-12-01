@@ -36,9 +36,16 @@ export default function ServicesSection() {
   const bottomMarqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Disable animation on mobile to prevent crashes
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return;
+    }
+
     let animationFrameId: number;
 
     const animate = () => {
+      // Double check width in loop just in case, or rely on initial check?
+      // Initial check is better for performance.
       const scrollY = window.scrollY;
       const speed = 0.5; // Adjust speed
 
@@ -98,7 +105,13 @@ export default function ServicesSection() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-20px)] min-h-[400px] rounded-3xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-300"
+              className="relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-20px)] min-h-[400px] rounded-3xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+              onClick={() => {
+                const element = document.getElementById(service.id);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
               {/* Foto di sfondo */}
               <Image

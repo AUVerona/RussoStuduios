@@ -3,9 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 
+
 export default function HeroSection() {
   const marqueeRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
 
   useEffect(() => {
     // Force video play

@@ -10,7 +10,7 @@ export default function ShopSection() {
     const marqueeText = "RUSSOSTUDIOS | MERCH ".repeat(10);
 
     return (
-        <section className="relative w-full min-h-screen bg-[#262626] text-white flex flex-col items-center py-20 overflow-hidden">
+        <section className="relative w-full min-h-screen bg-[#262626] text-white flex flex-col items-center py-20 overflow-hidden z-30">
 
             {/* Background Video */}
             <div className="absolute inset-0 w-full h-full z-0">
@@ -22,14 +22,12 @@ export default function ShopSection() {
                     playsInline
                     className="w-full h-full object-cover opacity-60"
                 >
-                    <source src="/FOTO/bgvideo1.mp4" type="video/mp4" />
+                    <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
                 </video>
             </div>
 
             {/* Gray Rectangle at Top */}
-            {/* Positioned above video (z-0) but below content (z-10) */}
             <div className="absolute top-0 left-0 w-full h-80 bg-[#262626] z-[5]"></div>
-
             {/* Gray Rectangle at Bottom */}
             <div className="absolute bottom-0 left-0 w-full h-40 bg-[#262626] z-[5]"></div>
 
@@ -50,8 +48,12 @@ export default function ShopSection() {
                 {/* Product Card 1 */}
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                        {/* Placeholder for T-shirt image */}
-                        <div className="text-gray-500">T-SHIRT IMAGE</div>
+                        <Image
+                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-49-09.png"
+                            alt="Russo Studios Tee 01"
+                            fill
+                            className="object-cover hover:scale-110 transition-transform duration-500"
+                        />
                     </div>
                     <div className="flex justify-between items-end">
                         <div>
@@ -68,7 +70,12 @@ export default function ShopSection() {
                 {/* Product Card 2 */}
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                        <div className="text-gray-500">T-SHIRT IMAGE</div>
+                        <Image
+                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-50-35.png"
+                            alt="Russo Studios Tee 02"
+                            fill
+                            className="object-cover hover:scale-110 transition-transform duration-500"
+                        />
                     </div>
                     <div className="flex justify-between items-end">
                         <div>
@@ -85,7 +92,12 @@ export default function ShopSection() {
                 {/* Product Card 3 */}
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                        <div className="text-gray-500">T-SHIRT IMAGE</div>
+                        <Image
+                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-49-09.png"
+                            alt="Russo Studios Tee 03"
+                            fill
+                            className="object-cover hover:scale-110 transition-transform duration-500"
+                        />
                     </div>
                     <div className="flex justify-between items-end">
                         <div>
@@ -119,6 +131,6 @@ export default function ShopSection() {
                 </div>
             </div>
 
-        </section>
+        </section >
     );
 }

@@ -49,19 +49,12 @@ export default function AboutMEsection() {
                 {/* Right: Image */}
                 <div className="flex-1 w-full flex justify-center md:justify-end">
                     <div className="relative w-full max-w-md aspect-[4/5] bg-[#333] rounded-3xl overflow-hidden shadow-2xl">
-                        {/* Placeholder for the person image */}
-                        <div className="absolute inset-0 flex items-center justify-center text-gray-500 font-bold">
-                            FOTO CHI SONO
-                        </div>
-                        {/* 
-                    If you have the image, uncomment and use this:
-                    <Image 
-                        src="/path/to/image.jpg" 
-                        alt="Chi Sono" 
-                        fill 
-                        className="object-cover"
-                    /> 
-                 */}
+                        <Image
+                            src="/FOTO/FOTODIEGO/DIEGORUSSO.jpeg"
+                            alt="Diego Russo"
+                            fill
+                            className="object-cover"
+                        />
                     </div>
                 </div>
 

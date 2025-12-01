@@ -7,8 +7,13 @@ import LazyVideo from "./LazyVideo";
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
 
 export default function VideoReelDisco() {
-  // placeholder reels currently all use the same video file
-  const reels = [1, 2, 3, 4];
+  // Specific videos for the reel
+  const videos = [
+    { src: "/FOTO/VIDEO/Disco1.webm", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco2.webm", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco3.webm", type: "video/webm" },
+    { src: "/FOTO/VIDEO/Disco4.webm", type: "video/webm" },
+  ];
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
 
   const rowRef = useRef<HTMLDivElement | null>(null);
@@ -21,11 +26,11 @@ export default function VideoReelDisco() {
         {/* Keep all four reels on one row and don't wrap; allow horizontal scroll on small screens */}
         {/* Reel row: no horizontal scroll, edge-to-edge, alternate up/down */}
         <div ref={rowRef} className="flex items-end w-full px-0 mx-0 gap-6" style={{ touchAction: 'pan-y' }}>
-          {reels.map((r) => (
+          {videos.map((video, index) => (
             <div
-              key={r}
+              key={index}
               className={
-                "flex flex-col items-center transform " + (r % 2 === 0 ? "-translate-y-6 md:-translate-y-10" : "translate-y-6 md:translate-y-10")
+                "flex flex-col items-center transform " + (index % 2 === 0 ? "-translate-y-6 md:-translate-y-10" : "translate-y-6 md:translate-y-10")
               }
               style={{ willChange: "transform" }}
             >
@@ -34,7 +39,7 @@ export default function VideoReelDisco() {
               <div
                 className={
                   "relative rounded-3xl overflow-hidden bg-black shadow-2xl flex-shrink-0 " +
-                  (r % 2 === 0 ? "-translate-y-8 md:-translate-y-16" : "translate-y-8 md:translate-y-16")
+                  (index % 2 === 0 ? "-translate-y-8 md:-translate-y-16" : "translate-y-8 md:translate-y-16")
                 }
                 style={{ width: '23vw', aspectRatio: '9/16', minWidth: 0, minHeight: 320 }}
               >
@@ -45,7 +50,7 @@ export default function VideoReelDisco() {
                   playsInline
                   className="absolute inset-0 w-full h-full object-cover"
                 >
-                  <source src="/FOTO/VIDEO/Disco1.webm" type="video/webm" />
+                  <source src={video.src} type={video.type} />
                 </video>
 
                 {/* label removed per request */}
