@@ -2,21 +2,16 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import LazyVideo from "./LazyVideo";
 
 
 export default function HeroSection() {
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+
 
 
   useEffect(() => {
-    // Force video play
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play().catch((err) => {
-        console.error("Video autoplay failed:", err);
-      });
-    }
+
 
     // Marquee animation
     let animationFrameId: number;
@@ -49,18 +44,11 @@ export default function HeroSection() {
     <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
       {/* Video di sfondo */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
+        <LazyVideo
+          src="/FOTO/VIDEO/videobg1.webm"
           poster="/FOTO/AZIENDE/poster_hero.webp"
           className="w-full h-full object-cover opacity-60"
-        >
-          <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
-        </video>
+        />
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/30" />
       </div>

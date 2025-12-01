@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import LazyVideo from './LazyVideo';
 
 export default function ShopSection() {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -15,15 +16,10 @@ export default function ShopSection() {
             {/* Background Video */}
             <div className="absolute inset-0 w-full h-full z-0">
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                <LazyVideo
+                    src="/FOTO/VIDEO/videobg1.webm"
                     className="w-full h-full object-cover opacity-60"
-                >
-                    <source src="/FOTO/VIDEO/videobg1.webm" type="video/webm" />
-                </video>
+                />
             </div>
 
             {/* Gray Rectangle at Top */}
@@ -49,7 +45,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-49-09.png"
+                            src="/FOTO/Maglie/maglia1.png"
                             alt="Russo Studios Tee 01"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
@@ -71,7 +67,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-50-35.png"
+                            src="/FOTO/Maglie/maglia2.png"
                             alt="Russo Studios Tee 02"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
@@ -93,7 +89,7 @@ export default function ShopSection() {
                 <div className="bg-[#333] rounded-3xl p-6 flex flex-col relative group hover:scale-[1.02] transition-transform duration-300">
                     <div className="relative w-full aspect-square bg-[#444] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/FOTO/Maglie/design_landscape_2025-11-30T20-49-09.png"
+                            src="/FOTO/Maglie/maglia1.png"
                             alt="Russo Studios Tee 03"
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
