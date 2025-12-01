@@ -48,6 +48,8 @@ export default function AziendaliSection() {
             {/* Video background */}
             <LazyVideo
               src="/FOTO/VIDEO/videobg1.webm"
+              poster="/FOTO/AZIENDE/1.webp"
+              disableOnMobile={true}
               className="absolute left-0 top-[120px] w-full h-[120vh] object-cover z-0"
             />
 

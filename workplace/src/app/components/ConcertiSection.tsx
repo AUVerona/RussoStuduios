@@ -90,6 +90,8 @@ export default function ConcertiSection() {
                             <div className="absolute inset-0 w-full h-full z-0">
                                 <LazyVideo
                                     src="/FOTO/VIDEO/videobg1.webm"
+                                    poster="/FOTO/CONCERTI/1.webp"
+                                    disableOnMobile={true}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -174,17 +176,18 @@ export default function ConcertiSection() {
 
                         {/* Spazio vuoto */}
                         <div className="w-full" style={{ height: '96px', zIndex: 10, position: 'relative' }} />
-                    </section>
+                    </section >
 
                     {/* Descrizione Desktop */}
-                    <div className="w-full relative" style={{ background: '#262626' }}>
+                    < div className="w-full relative" style={{ background: '#262626' }
+                    }>
                         <div className="max-w-6xl mx-auto px-6 py-12 text-center">
                             <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                                 Consegno foto e video potenti, sinceri e fedeli all’identità di chi sta sul palco. Un racconto autentico del live, da utilizzare per promozione, press kit, comunicazione social o ricordi del tour.
                             </p>
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
             )}
 
             {/* MOBILE VERSION */}

@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-
 import LazyVideo from './LazyVideo';
 
 export default function MerchSection() {
@@ -12,6 +11,8 @@ export default function MerchSection() {
             <div className="absolute w-[150%] h-[60vh] md:h-[70vh] bg-black transform rotate-6 -translate-y-24 flex items-center justify-center overflow-hidden shadow-2xl border-y-4 border-white/10 top-1/2 left-1/2 -translate-x-1/2 -mt-32 z-40">
                 <LazyVideo
                     src="/FOTO/VIDEO/videobg1.webm"
+                    poster="/FOTO/AZIENDE/poster_hero.webp"
+                    disableOnMobile={true}
                     className="w-full h-full object-cover opacity-80"
                 />
             </div>

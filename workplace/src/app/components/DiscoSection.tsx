@@ -95,6 +95,8 @@ export default function DiscoSection() {
               <div className="absolute inset-0 w-full h-full z-0">
                 <LazyVideo
                   src="/FOTO/VIDEO/videobg1.webm"
+                  poster="/FOTO/FOTO DISCO/1.webp"
+                  disableOnMobile={true}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -176,11 +178,12 @@ export default function DiscoSection() {
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </div >
+          </section >
 
           {/* Descrizione attaccata ai reel, con marquee in mezzo */}
-          <div className="w-full relative" style={{ background: '#262626' }}>
+          < div className="w-full relative" style={{ background: '#262626' }
+          }>
             <div className="max-w-6xl mx-auto px-6 pt-8 pb-2">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                 Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica. Realizzo servizi fotografici pensati per valorizzare l’evento e il locale, mostrando in modo chiaro e moderno ciò che il pubblico vive.
@@ -196,7 +199,7 @@ export default function DiscoSection() {
 
             {/* Reel subito sotto, senza spazio */}
             <VideoReelDisco />
-          </div>
+          </div >
 
           <div className="w-full relative" style={{ background: '#262626' }}>
             <div className="max-w-6xl mx-auto px-6  pt-8 pb-2">
@@ -205,7 +208,7 @@ export default function DiscoSection() {
               </p>
             </div>
           </div>
-        </div>
+        </div >
       )}
 
       {/* MOBILE VERSION */}
