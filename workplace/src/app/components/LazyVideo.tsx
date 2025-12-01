@@ -20,16 +20,13 @@ export default function LazyVideo({ src, poster, className, style, unloadOnPause
                     setHasLoaded(true);
                 } else {
                     setIsIntersecting(false);
-                    // If aggressive unloading is enabled, we reset hasLoaded when it goes out of view
-                    // But to avoid flickering on small scrolls, we might want a larger margin or a timeout.
-                    // For now, let's just respect the flag directly.
                     if (unloadOnPause) {
                         setHasLoaded(false);
                     }
                 }
             },
             {
-                rootMargin: "200px",
+                rootMargin: "300px",
                 threshold: 0.1,
             }
         );
@@ -45,17 +42,27 @@ export default function LazyVideo({ src, poster, className, style, unloadOnPause
         };
     }, [unloadOnPause]);
 
+    // Force load when source is added
     useEffect(() => {
-        if (videoRef.current) {
-            if (isIntersecting) {
-                if (hasLoaded && videoRef.current.paused && videoRef.current.readyState >= 2) {
-                    videoRef.current.play().catch(() => { });
-                }
-            } else {
-                if (!videoRef.current.paused) {
-                    videoRef.current.pause();
-                }
+        if (hasLoaded && videoRef.current) {
+            videoRef.current.load();
+        }
+    }, [hasLoaded]);
+
+    // Handle play/pause based on visibility
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (isIntersecting && hasLoaded) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Auto-play was prevented
+                });
             }
+        } else if (!isIntersecting) {
+            video.pause();
         }
     }, [isIntersecting, hasLoaded]);
 
