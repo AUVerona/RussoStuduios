@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+interface ConsoleLog {
+    type: string;
+    message: string;
+    timestamp: string;
+}
+
 export async function POST(req: Request) {
     try {
         const { userAgent, timestamp, screenWidth, screenHeight, consoleLogs } = await req.json();
@@ -25,11 +31,11 @@ export async function POST(req: Request) {
         });
 
         const consoleLogsText = consoleLogs && consoleLogs.length > 0
-            ? consoleLogs.map((log: any) => `[${log.type.toUpperCase()}] ${log.message}`).join('\n        ')
+            ? consoleLogs.map((log: ConsoleLog) => `[${log.type.toUpperCase()}] ${log.message}`).join('\n        ')
             : 'Nessun errore o warning rilevato';
 
         const consoleLogsHtml = consoleLogs && consoleLogs.length > 0
-            ? consoleLogs.map((log: any) => {
+            ? consoleLogs.map((log: ConsoleLog) => {
                 const color = log.type === 'error' ? '#ff0000' : '#ff9800';
                 return `<p style="color: ${color}; font-family: monospace; margin: 5px 0;"><strong>[${log.type.toUpperCase()}]</strong> ${log.message}</p>`;
             }).join('')
