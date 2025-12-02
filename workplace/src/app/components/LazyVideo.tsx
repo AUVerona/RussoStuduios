@@ -5,17 +5,30 @@ interface LazyVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
     src: string;
     poster?: string;
     rootMargin?: string; // Quanto prima caricare il video (es. "200px")
+    disableOnMobile?: boolean; // Se true, mostra solo il poster su mobile
 }
 
 export default function LazyVideo({
     src,
     poster,
     rootMargin = "0px",
+    disableOnMobile = false,
     className,
     ...props
 }: LazyVideoProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isIntersecting, setIntersecting] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile on mount
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -44,6 +57,11 @@ export default function LazyVideo({
         const video = videoRef.current;
         if (!video) return;
 
+        // Se disableOnMobile è true e siamo su mobile, non caricare il video
+        if (disableOnMobile && isMobile) {
+            return;
+        }
+
         if (isIntersecting) {
             // 1. SE VISIBILE: Assegna la sorgente e riproduci
             if (!video.src) {
@@ -65,7 +83,7 @@ export default function LazyVideo({
             video.load(); // <--- Forza il browser a rilasciare la memoria
         }
 
-    }, [isIntersecting, src]);
+    }, [isIntersecting, src, disableOnMobile, isMobile]);
 
     return (
         <video
