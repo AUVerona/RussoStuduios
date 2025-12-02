@@ -18,9 +18,29 @@ export default function MobileLogger() {
             // Capture console logs
             const consoleLogs: Array<{ type: string, message: string, timestamp: string }> = [];
 
-            // Override console methods to capture logs
+            // Override console methods to capture ALL logs
+            const originalLog = console.log;
+            const originalInfo = console.info;
             const originalError = console.error;
             const originalWarn = console.warn;
+
+            console.log = (...args) => {
+                consoleLogs.push({
+                    type: 'log',
+                    message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' '),
+                    timestamp: new Date().toISOString()
+                });
+                originalLog.apply(console, args);
+            };
+
+            console.info = (...args) => {
+                consoleLogs.push({
+                    type: 'info',
+                    message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' '),
+                    timestamp: new Date().toISOString()
+                });
+                originalInfo.apply(console, args);
+            };
 
             console.error = (...args) => {
                 consoleLogs.push({
@@ -40,7 +60,7 @@ export default function MobileLogger() {
                 originalWarn.apply(console, args);
             };
 
-            // Wait a bit to capture initial logs, then send
+            // Wait 3 seconds to capture all initial logs, then send
             setTimeout(() => {
                 // Send log to API
                 fetch('/api/log-mobile', {
@@ -59,15 +79,17 @@ export default function MobileLogger() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            console.log('Mobile access logged successfully');
+                            // Use original console.log to avoid capturing this message
+                            originalLog('Mobile access logged successfully');
                             sessionStorage.setItem('mobileLogSent', 'true');
                             setHasLogged(true);
                         }
                     })
                     .catch(error => {
-                        console.error('Error logging mobile access:', error);
+                        // Use original console.error to avoid capturing this message
+                        originalError('Error logging mobile access:', error);
                     });
-            }, 3000); // Wait 3 seconds to capture initial page load errors
+            }, 3000); // Wait 3 seconds to capture initial page load logs
         }
     }, [hasLogged]);
 

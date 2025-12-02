@@ -31,15 +31,20 @@ export async function POST(req: Request) {
         });
 
         const consoleLogsText = consoleLogs && consoleLogs.length > 0
-            ? consoleLogs.map((log: ConsoleLog) => `[${log.type.toUpperCase()}] ${log.message}`).join('\n        ')
-            : 'Nessun errore o warning rilevato';
+            ? consoleLogs.map((log: ConsoleLog) => `[${log.timestamp}] [${log.type.toUpperCase()}] ${log.message}`).join('\n        ')
+            : 'Nessun log rilevato';
 
         const consoleLogsHtml = consoleLogs && consoleLogs.length > 0
             ? consoleLogs.map((log: ConsoleLog) => {
-                const color = log.type === 'error' ? '#ff0000' : '#ff9800';
-                return `<p style="color: ${color}; font-family: monospace; margin: 5px 0;"><strong>[${log.type.toUpperCase()}]</strong> ${log.message}</p>`;
+                let color = '#333';
+                if (log.type === 'error') color = '#ff0000';
+                else if (log.type === 'warning') color = '#ff9800';
+                else if (log.type === 'info') color = '#2196f3';
+                else if (log.type === 'log') color = '#4caf50';
+
+                return `<p style="color: ${color}; font-family: monospace; margin: 5px 0; font-size: 12px;"><strong>[${log.type.toUpperCase()}]</strong> ${log.message}</p>`;
             }).join('')
-            : '<p style="color: #4caf50;">✅ Nessun errore o warning rilevato</p>';
+            : '<p style="color: #999;">Nessun log rilevato</p>';
 
         const mailOptions = {
             from: user,
