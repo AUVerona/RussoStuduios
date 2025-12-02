@@ -26,8 +26,13 @@ export default function VideoReelAziende() {
 
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
 
-      // Auto-play the preview loop
-      videoElement.play().catch(() => { });
+      // Try to play the video
+      const playPromise = videoElement.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log('Autoplay prevented');
+        });
+      }
 
       return () => {
         videoElement.removeEventListener('timeupdate', handleTimeUpdate);
@@ -38,7 +43,6 @@ export default function VideoReelAziende() {
       setIsHovering(true);
       if (window.matchMedia("(hover: hover)").matches) {
         if (videoRef.current) {
-          // Continue playing from current position (let it play full video)
           videoRef.current.play().catch(() => { });
         }
         setIsPlaying(true);
@@ -49,7 +53,6 @@ export default function VideoReelAziende() {
       setIsHovering(false);
       if (window.matchMedia("(hover: hover)").matches) {
         if (videoRef.current) {
-          // Reset to beginning to restart 4-second loop
           videoRef.current.currentTime = 0;
           videoRef.current.play().catch(() => { });
         }
@@ -82,8 +85,10 @@ export default function VideoReelAziende() {
           <video
             ref={videoRef}
             src={video.src}
+            poster={video.poster}
             className="absolute inset-0 w-full h-full object-cover"
             muted
+            autoPlay
             playsInline
             loop
             preload="metadata"
