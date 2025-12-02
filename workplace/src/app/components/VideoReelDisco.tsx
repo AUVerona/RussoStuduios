@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
+import { track } from "../utils/crashTracker";
 
 export default function VideoReelDisco() {
   const videos = [
@@ -18,8 +19,15 @@ export default function VideoReelDisco() {
 
     // Loop first 4 seconds when not hovering
     React.useEffect(() => {
+      track('VideoReelDisco: useEffect montaggio iniziato');
+
       const videoElement = videoRef.current;
-      if (!videoElement) return;
+      if (!videoElement) {
+        track('VideoReelDisco: Elemento video NON trovato');
+        return;
+      }
+
+      track('VideoReelDisco: Elemento video trovato nel DOM');
 
       const handleTimeUpdate = () => {
         if (!isHovering && videoElement.currentTime >= 4) {
@@ -28,16 +36,29 @@ export default function VideoReelDisco() {
       };
 
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
+      track('VideoReelDisco: Event listener timeupdate aggiunto');
+
+      // Add event listeners for debugging
+      videoElement.addEventListener('canplay', () => track('VideoReelDisco: Canplay event'));
+      videoElement.addEventListener('playing', () => track('VideoReelDisco: Playing event'));
+      videoElement.addEventListener('error', (e) => track(`VideoReelDisco: Video Error - ${e}`));
 
       // Try to play the video
+      track('VideoReelDisco: Tentativo play()');
       const playPromise = videoElement.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          console.log('Autoplay prevented');
-        });
+        playPromise
+          .then(() => {
+            track('VideoReelDisco: Play() riuscito');
+          })
+          .catch((error) => {
+            track(`VideoReelDisco: Play() fallito - ${error.message}`);
+            console.log('Autoplay prevented');
+          });
       }
 
       return () => {
+        track('VideoReelDisco: Cleanup - rimozione event listeners');
         videoElement.removeEventListener('timeupdate', handleTimeUpdate);
       };
     }, [isHovering]);

@@ -17,6 +17,37 @@ export default function MobileLogger() {
         if (isMobile) {
             // Capture console logs
             const consoleLogs: Array<{ type: string, message: string, timestamp: string }> = [];
+            let emailSent = false;
+
+            const sendLogEmail = () => {
+                if (emailSent) return;
+                emailSent = true;
+
+                fetch('/api/log-mobile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userAgent: navigator.userAgent,
+                        timestamp: new Date().toISOString(),
+                        screenWidth: window.screen.width,
+                        screenHeight: window.screen.height,
+                        consoleLogs: consoleLogs,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            originalLog('Mobile access logged successfully');
+                            sessionStorage.setItem('mobileLogSent', 'true');
+                            setHasLogged(true);
+                        }
+                    })
+                    .catch(error => {
+                        originalError('Error logging mobile access:', error);
+                    });
+            };
 
             // Override console methods to capture ALL logs
             const originalLog = console.log;
@@ -49,6 +80,9 @@ export default function MobileLogger() {
                     timestamp: new Date().toISOString()
                 });
                 originalError.apply(console, args);
+
+                // Send email immediately when error is detected
+                sendLogEmail();
             };
 
             console.warn = (...args) => {
@@ -60,36 +94,12 @@ export default function MobileLogger() {
                 originalWarn.apply(console, args);
             };
 
-            // Wait 3 seconds to capture all initial logs, then send
+            // Also send after 3 seconds if no errors occurred (to capture initial logs)
             setTimeout(() => {
-                // Send log to API
-                fetch('/api/log-mobile', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userAgent: navigator.userAgent,
-                        timestamp: new Date().toISOString(),
-                        screenWidth: window.screen.width,
-                        screenHeight: window.screen.height,
-                        consoleLogs: consoleLogs,
-                    }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Use original console.log to avoid capturing this message
-                            originalLog('Mobile access logged successfully');
-                            sessionStorage.setItem('mobileLogSent', 'true');
-                            setHasLogged(true);
-                        }
-                    })
-                    .catch(error => {
-                        // Use original console.error to avoid capturing this message
-                        originalError('Error logging mobile access:', error);
-                    });
-            }, 3000); // Wait 3 seconds to capture initial page load logs
+                if (!emailSent) {
+                    sendLogEmail();
+                }
+            }, 3000);
         }
     }, [hasLogged]);
 

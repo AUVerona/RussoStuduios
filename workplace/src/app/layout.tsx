@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import WhatsAppButton from "./components/WhatsAppButton";
 import MobileLogger from "./components/MobileLogger";
+import CrashDetector from "./components/CrashDetector";
 import Script from "next/script";
 import { ImageModalProvider } from "./context/ImageModalContext";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
       </head>
       <body className={`antialiased`}>
         <ImageModalProvider>
+          <CrashDetector />
           <MobileLogger />
           <Navbar />
           {children}
