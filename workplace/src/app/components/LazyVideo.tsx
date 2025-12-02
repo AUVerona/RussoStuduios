@@ -1,112 +1,82 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import React, { useRef, useEffect, useState } from "react";
 
 interface LazyVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
     src: string;
     poster?: string;
-    unloadOnPause?: boolean;
-    disableOnMobile?: boolean;
-    rootMargin?: string;
+    rootMargin?: string; // Quanto prima caricare il video (es. "200px")
 }
 
-export default function LazyVideo({ src, poster, className, style, unloadOnPause = false, disableOnMobile = false, rootMargin = "50px", ...props }: LazyVideoProps) {
+export default function LazyVideo({
+    src,
+    poster,
+    rootMargin = "0px",
+    className,
+    ...props
+}: LazyVideoProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [isIntersecting, setIsIntersecting] = useState(false);
-    const [hasLoaded, setHasLoaded] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isIntersecting, setIntersecting] = useState(false);
 
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
-    useEffect(() => {
-        // If disabled on mobile and we are on mobile, don't observe
-        if (disableOnMobile && isMobile) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsIntersecting(true);
-                    setHasLoaded(true);
-                } else {
-                    setIsIntersecting(false);
-                    if (unloadOnPause) {
-                        setHasLoaded(false);
-                    }
-                }
-            },
-            {
-                rootMargin: rootMargin,
-                threshold: 0.1,
-            }
-        );
-
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
-
-        return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
-            }
-        };
-    }, [unloadOnPause, disableOnMobile, isMobile, rootMargin]);
-
-    // Force load when source is added
-    useEffect(() => {
-        if (hasLoaded && videoRef.current) {
-            videoRef.current.load();
-        }
-    }, [hasLoaded]);
-
-    // Handle play/pause based on visibility
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
 
-        if (isIntersecting && hasLoaded) {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // Aggiorna lo stato se l'elemento è visibile o no
+                setIntersecting(entry.isIntersecting);
+            },
+            {
+                rootMargin, // Carica un po' prima che entri nello schermo
+                threshold: 0.1 // Basta che si veda il 10%
+            }
+        );
+
+        observer.observe(video);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [rootMargin]);
+
+    // Gestione Aggressiva della Memoria
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (isIntersecting) {
+            // 1. SE VISIBILE: Assegna la sorgente e riproduci
+            if (!video.src) {
+                video.src = src;
+                video.load(); // Importante per ricaricare
+            }
+
             const playPromise = video.play();
             if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // Auto-play was prevented
+                playPromise.catch((error) => {
+                    console.log("Autoplay bloccato (normale su mobile se power save è attivo):", error);
                 });
             }
-        } else if (!isIntersecting) {
-            video.pause();
-        }
-    }, [isIntersecting, hasLoaded]);
 
-    // If disabled on mobile and we are on mobile, render an image instead
-    if (disableOnMobile && isMobile && poster) {
-        return (
-            <div className={className} style={{ ...style, position: 'relative' }}>
-                <Image
-                    src={poster}
-                    alt="Video poster"
-                    fill
-                    className="object-cover"
-                />
-            </div>
-        );
-    }
+        } else {
+            // 2. SE NON VISIBILE: Distruggi tutto per liberare RAM
+            video.pause();
+            video.removeAttribute("src"); // <--- QUESTA RIGA SALVA DAL CRASH
+            video.load(); // <--- Forza il browser a rilasciare la memoria
+        }
+
+    }, [isIntersecting, src]);
 
     return (
         <video
             ref={videoRef}
-            className={className}
-            style={style}
             poster={poster}
-            playsInline
-            muted
+            className={className}
+            playsInline // CRUCIALE PER IOS
+            webkit-playsinline="true" // Vecchia sintassi iOS per sicurezza
+            muted // Obbligatorio per autoplay
             loop
-            preload="none"
             {...props}
-        >
-            {hasLoaded && <source src={src} type={src.toLowerCase().endsWith('.webm') ? "video/webm" : "video/mp4"} />}
-        </video>
+        />
     );
 }
