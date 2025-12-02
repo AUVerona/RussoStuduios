@@ -50,7 +50,6 @@ export default function VideoReelDisco() {
                   muted
                   loop
                   playsInline
-                  unloadOnPause={true}
                   rootMargin="50px"
                 />
 

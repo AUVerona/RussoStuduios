@@ -18,7 +18,6 @@ export default function VideoReelAziende() {
             muted
             loop
             playsInline
-            unloadOnPause={true}
             rootMargin="50px"
           />
         </div>
@@ -32,7 +31,6 @@ export default function VideoReelAziende() {
             muted
             loop
             playsInline
-            unloadOnPause={true}
             rootMargin="50px"
           />
         </div>
@@ -46,7 +44,6 @@ export default function VideoReelAziende() {
             muted
             loop
             playsInline
-            unloadOnPause={true}
             rootMargin="50px"
           />
         </div>
