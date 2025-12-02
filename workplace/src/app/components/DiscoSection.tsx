@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import VideoReelDisco from "./VideoReelDisco";
-import LazyVideo from "./LazyVideo";
+
 import { useImageModal } from "../context/ImageModalContext";
 
 // Prima riga - foto 1-9
@@ -93,11 +93,11 @@ export default function DiscoSection() {
             <div className="relative w-full h-full overflow-hidden bg-black">
               {/* Video di sfondo */}
               <div className="absolute inset-0 w-full h-full z-0">
-                <LazyVideo
-                  src="/FOTO/VIDEO/videobg1.webm"
-                  poster="/FOTO/FOTO DISCO/1.webp"
-                  disableOnMobile={true}
-                  className="w-full h-full object-cover"
+                <Image
+                  src="/FOTO/FOTO DISCO/1.webp"
+                  alt="Disco Background"
+                  fill
+                  className="object-cover"
                 />
               </div>
 
@@ -191,7 +191,7 @@ export default function DiscoSection() {
             </div>
 
             {/* Scritta DISCO fissa, centrata, non scrollabile */}
-            <div className="w-full flex justify-center pointer-events-none overflow-hidden mt-32 md:mt-20 z-10" style={{ position: 'relative', zIndex: 10, marginBottom: '-2rem', maxWidth: '100vw' }}>
+            <div className="w-full flex justify-center pointer-events-none overflow-hidden mt-32 md:mt-20 z-10" style={{ position: 'relative', zIndex: 50, marginBottom: '-2rem', maxWidth: '100vw' }}>
               <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem', animation: 'none' }}>
                 DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO
               </div>
