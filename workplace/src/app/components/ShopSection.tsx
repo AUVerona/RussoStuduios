@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
-
+import LazyVideo from './LazyVideo';
 
 export default function ShopSection() {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -16,11 +16,11 @@ export default function ShopSection() {
             {/* Background Video */}
             <div className="absolute inset-0 w-full h-full z-0">
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                <Image
-                    src="/FOTO/AZIENDE/poster_hero.webp"
-                    alt="Shop Background"
-                    fill
-                    className="object-cover opacity-60"
+                <LazyVideo
+                    src="/FOTO/VIDEO/videobg1.webm"
+                    poster="/FOTO/AZIENDE/poster_hero.webp"
+                    disableOnMobile={true}
+                    className="w-full h-full object-cover opacity-60"
                 />
             </div>
 

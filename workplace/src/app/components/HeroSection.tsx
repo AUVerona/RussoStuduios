@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-
+import LazyVideo from "./LazyVideo";
 
 
 export default function HeroSection() {
@@ -44,12 +44,11 @@ export default function HeroSection() {
     <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
       {/* Video di sfondo */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <Image
-          src="/FOTO/AZIENDE/poster_hero.webp"
-          alt="Hero Background"
-          fill
-          className="object-cover opacity-60"
-          priority
+        <LazyVideo
+          src="/FOTO/VIDEO/videobg1.webm"
+          poster="/FOTO/AZIENDE/poster_hero.webp"
+          disableOnMobile={true}
+          className="w-full h-full object-cover opacity-60"
         />
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/30" />

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
-
+import LazyVideo from "./LazyVideo";
 
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
@@ -46,14 +46,12 @@ export default function AziendaliSection() {
 
             {/* Video background */}
             {/* Video background */}
-            <div className="absolute left-0 top-[120px] w-full h-[120vh] z-0">
-              <Image
-                src="/FOTO/AZIENDE/1.webp"
-                alt="Aziendali Background"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <LazyVideo
+              src="/FOTO/VIDEO/videobg1.webm"
+              poster="/FOTO/AZIENDE/1.webp"
+              disableOnMobile={true}
+              className="absolute left-0 top-[120px] w-full h-[120vh] object-cover z-0"
+            />
 
             <div className="relative w-full mx-0 px-0 z-30">
               {/* Spazio vuoto */}

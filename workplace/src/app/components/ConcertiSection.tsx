@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
-
+import LazyVideo from "./LazyVideo";
 
 export default function ConcertiSection() {
     const images = [
@@ -88,11 +88,11 @@ export default function ConcertiSection() {
                         <div className="relative w-full h-full overflow-hidden bg-black">
                             {/* Video di sfondo */}
                             <div className="absolute inset-0 w-full h-full z-0">
-                                <Image
-                                    src="/FOTO/CONCERTI/1.webp"
-                                    alt="Concerti Background"
-                                    fill
-                                    className="object-cover"
+                                <LazyVideo
+                                    src="/FOTO/VIDEO/videobg1.webm"
+                                    poster="/FOTO/CONCERTI/1.webp"
+                                    disableOnMobile={true}
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
 
