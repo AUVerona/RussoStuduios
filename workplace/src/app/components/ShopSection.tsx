@@ -18,7 +18,7 @@ export default function ShopSection() {
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
                 <LazyVideo
                     src="/FOTO/VIDEO/videobg1.webm"
-                    poster="/FOTO/AZIENDE/poster_hero.webp"
+                    poster="/sfondobase.png"
                     disableOnMobile={true}
                     className="w-full h-full object-cover opacity-60"
                 />

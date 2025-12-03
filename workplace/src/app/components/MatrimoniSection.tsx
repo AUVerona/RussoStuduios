@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
+import { useMobileParallax } from "../hooks/useMobileParallax";
 
 const matrimoniPhotos = [
   "/FOTO/MATRIMONI/1.webp",
@@ -47,6 +48,10 @@ export default function MatrimoniSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Mobile Parallax Refs
+  const mobileSectionRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+
   // Global Modal Context
   const { openModal } = useImageModal();
 
@@ -57,7 +62,7 @@ export default function MatrimoniSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Parallax Animation Logic
+  // Parallax Animation Logic (Desktop)
   useEffect(() => {
     if (isMobile) return;
 
@@ -70,22 +75,7 @@ export default function MatrimoniSection() {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      // Calculate progress based on section visibility
-      // Start moving when section enters viewport, stop when it leaves
-      // rect.top is distance from top of viewport
-
-      // We want to map scroll position to horizontal translation.
-      // Let's say we want to move 1000px horizontally over the course of the section scroll.
-
-      // Simple parallax: translateX depends on window.scrollY relative to section position
-      // But since we want it to move *while* we scroll past it, we can use the rect.top
-
       const speed = 0.5; // Adjust speed factor
-      const initialOffset = 0; // Start at 0 or some offset
-
-      // When rect.top is viewportHeight (just entering), translation should be 0 (or start point)
-      // As rect.top decreases (scrolling down), translation becomes negative (moves left)
-
       const scrollDist = viewportHeight - rect.top;
       const translateX = scrollDist * speed;
 
@@ -97,6 +87,14 @@ export default function MatrimoniSection() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
+
+  // Mobile Parallax Animation
+  useMobileParallax({
+    sectionRef: mobileSectionRef,
+    trackRef: mobileTrackRef,
+    isMobile,
+    speed: 0.8
+  });
 
   return (
     <>
@@ -163,20 +161,19 @@ export default function MatrimoniSection() {
             </div>
 
             {/* Description */}
-            < div className="max-w-6xl mx-auto px-6 mt-24 text-center" >
+            <div className="max-w-6xl mx-auto px-6 mt-24 text-center">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
                 Il matrimonio è uno dei momenti più importanti nella vita di una coppia.
                 Lavoro in modo naturale, senza forzature, lasciando che siano le emozioni a guidare le immagini.
               </p>
-            </div >
+            </div>
 
-          </section >
-        </div >
-      )
-      }
+          </section>
+        </div>
+      )}
 
       {/* MOBILE VERSION */}
-      <div className="block md:hidden w-full bg-[#262626] py-12">
+      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
         {/* Title */}
         <div className="w-full flex justify-center mb-8">
           <h2 className="text-5xl font-black text-white uppercase tracking-tighter">
@@ -192,25 +189,25 @@ export default function MatrimoniSection() {
           </p>
         </div>
 
-        {/* Vertical Stack of Images */}
-        <div className="flex flex-col gap-4 px-4">
-          {matrimoniPhotos.map((photo, idx) => (
-            <div
-              key={`mobile-matrimoni-${idx}`}
-              className="w-full rounded-3xl overflow-hidden shadow-2xl cursor-pointer active:scale-95 transition-transform"
-              onClick={() => openModal(photo)}
-            >
-              <Image
-                src={photo}
-                alt={`Matrimoni Mobile ${idx}`}
-                width={800}
-                height={600}
-                className="w-full h-auto object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </div>
-          ))}
+        {/* Horizontal Scroll Track (Parallax) */}
+        <div className="w-full overflow-visible">
+          <div ref={mobileTrackRef} className="flex gap-4 px-4 will-change-transform">
+            {matrimoniPhotos.map((photo, idx) => (
+              <div
+                key={`mobile-matrimoni-${idx}`}
+                className="relative flex-shrink-0 w-[80vw] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl cursor-pointer active:scale-95 transition-transform"
+                onClick={() => openModal(photo)}
+              >
+                <Image
+                  src={photo}
+                  alt={`Matrimoni Mobile ${idx}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 80vw, 33vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Description Part 2 */}

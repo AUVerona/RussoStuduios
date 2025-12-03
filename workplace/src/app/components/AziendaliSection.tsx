@@ -1,14 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
 import LazyVideo from "./LazyVideo";
 
-// Small grid of looping video reels used as background for each block.
-// Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
-
 export default function AziendaliSection() {
-  // placeholder reels currently all use the same video file
   const images = [
     "/FOTO/AZIENDE/1.webp",
     "/FOTO/AZIENDE/2.webp",
@@ -19,6 +15,7 @@ export default function AziendaliSection() {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [bgError, setBgError] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
+
   const { openModal } = useImageModal();
 
   useEffect(() => {
@@ -45,10 +42,9 @@ export default function AziendaliSection() {
             </div>
 
             {/* Video background */}
-            {/* Video background */}
             <LazyVideo
               src="/FOTO/VIDEO/videobg1.webm"
-              poster="/FOTO/AZIENDE/1.webp"
+              poster="/sfondobase.png"
               disableOnMobile={true}
               className="absolute left-0 top-[120px] w-full h-[120vh] object-cover z-0"
             />
@@ -104,7 +100,7 @@ export default function AziendaliSection() {
       {/* =========================================
           MOBILE VERSION (Hidden on desktop)
           ========================================= */}
-      <div className="block md:hidden w-full bg-[#262626] py-12">
+      <div className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
         {/* Title */}
         <div className="w-full flex justify-center mb-8">
           <h2 className="text-5xl font-black text-white uppercase tracking-tighter">
@@ -120,22 +116,17 @@ export default function AziendaliSection() {
           </p>
         </div>
 
-        {/* Grid Layout of Images - 2 Columns */}
-        <div className="grid grid-cols-2 gap-4 px-4 w-full">
+        {/* Static Grid 2x2 */}
+        <div className="grid grid-cols-2 gap-4 px-4">
           {images.map((img, idx) => (
-            <div key={`mobile-aziendali-${idx}`} className="flex justify-center w-full">
-              <div
-                className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg border border-white/10 cursor-pointer active:scale-95 transition-transform"
-                onClick={() => openModal(img)}
-              >
-                <Image
-                  src={img}
-                  alt={`Aziendali Mobile ${idx}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
+            <div key={`mobile-aziendali-${idx}`} className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg border border-white/10" onClick={() => openModal(img)}>
+              <Image
+                src={img}
+                alt={`Aziendali Mobile ${idx}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
             </div>
           ))}
         </div>

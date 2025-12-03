@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import VideoReelDisco from "./VideoReelDisco";
-import LazyVideo from "./LazyVideo";
 import { useImageModal } from "../context/ImageModalContext";
+import { useMobileParallax } from "../hooks/useMobileParallax";
+import VideoReelDisco from "./VideoReelDisco";
 
 // Prima riga - foto 1-9
 const discoPhotosRow1 = [
@@ -34,175 +34,125 @@ const discoPhotosRow2 = [
 export default function DiscoSection() {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = React.useState(true); // Default to true to avoid loading desktop assets on mobile init
+
+  // Mobile Parallax Refs
+  const mobileSectionRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+
+  const [isMobile, setIsMobile] = useState(true);
   const { openModal } = useImageModal();
 
   useEffect(() => {
-    // Check if mobile on mount
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Parallax Animation Logic (Desktop)
   useEffect(() => {
-    if (isMobile) return; // Don't run animation loop on mobile
+    if (isMobile) return;
 
-    let animationFrameId: number;
+    const handleScroll = () => {
+      if (!row1Ref.current || !row2Ref.current) return;
 
-    const animate = () => {
       const scrollY = window.scrollY;
-      const speed = 0.5; // Adjust speed
+      const speed1 = 0.5; // Row 1 speed
+      const speed2 = -0.5; // Row 2 speed (reverse direction)
 
-      // Row 1 (Top): Moves Left to Right (L->R)
-      if (row1Ref.current) {
-        const width = row1Ref.current.scrollWidth / 2;
-        // Infinite scroll: moves right as you scroll down
-        // Start at -width (seeing the duplicate set) and move right towards 0
-        const x = -width + (scrollY * speed) % width;
-        row1Ref.current.style.transform = `translateX(${x}px)`;
-      }
-
-      // Row 2 (Bottom): Moves Right to Left (R->L)
-      if (row2Ref.current) {
-        const width = row2Ref.current.scrollWidth / 2;
-        // Infinite scroll: moves left as you scroll down
-        // Start at 0 and move left towards -width
-        const x = -(scrollY * speed) % width;
-        row2Ref.current.style.transform = `translateX(${x}px)`;
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
+      row1Ref.current.style.transform = `translateX(${scrollY * speed1}px)`;
+      row2Ref.current.style.transform = `translateX(${scrollY * speed2}px)`;
     };
 
-    animate();
-
-    return () => cancelAnimationFrame(animationFrameId);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
+
+  // Mobile Parallax Animation
+  useMobileParallax({
+    sectionRef: mobileSectionRef,
+    trackRef: mobileTrackRef,
+    isMobile,
+    speed: 0.8
+  });
 
   return (
     <>
       <div id="servizi-discoteche" className="scroll-mt-24" />
+
       {/* DESKTOP VERSION */}
       {!isMobile && (
         <div className="hidden md:block">
-          {/* Sezione principale con video di sfondo */}
-          <section className="relative min-h-screen w-full overflow-hidden bg-black">
+          <section className="relative w-full bg-[#262626] py-32 overflow-hidden">
 
-            {/* Wrapper per contenuto con overflow hidden (immagini) - BG BLACK FORCED */}
-            <div className="relative w-full h-full overflow-hidden bg-black">
-              {/* Video di sfondo */}
-              <div className="absolute inset-0 w-full h-full z-0">
-                <LazyVideo
-                  src="/FOTO/VIDEO/videobg1.webm"
-                  poster="/FOTO/FOTO DISCO/1.webp"
-                  disableOnMobile={true}
-                  className="w-full h-full object-cover"
-                />
+            {/* Scritta DISCO fissa */}
+            <div className="w-full flex justify-center pointer-events-none overflow-hidden mb-16">
+              <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem' }}>
+                <span className="lg:hidden">DISCO</span>
+                <span className="hidden lg:inline">DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO</span>
               </div>
+            </div>
 
-              {/* Griglia 2 righe di foto infinite */}
-              <div className="relative z-10 flex flex-col gap-4 mt-16 py-24">
+            {/* Wrapper per contenuto con overflow hidden */}
+            <div className="w-full overflow-hidden">
+              <div className="flex flex-col gap-12">
 
-                {/* Mobile: Griglia 2x2 statica */}
-                <div className="md:hidden grid grid-cols-2 gap-4 px-4">
-                  {discoPhotosRow1.slice(0, 4).map((photo, idx) => (
-                    <div key={`mobile-${idx}`} className="relative rounded-3xl overflow-hidden">
+                {/* Row 1 - Left to Right */}
+                <div ref={row1Ref} className="flex gap-6 w-max will-change-transform">
+                  {[...discoPhotosRow1, ...discoPhotosRow1].map((photo, idx) => (
+                    <div
+                      key={`row1-${idx}`}
+                      className="relative w-[400px] h-[300px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-100 transition-all duration-500 hover:scale-105 hover:z-10"
+                      onClick={() => openModal(photo)}
+                    >
                       <Image
                         src={photo}
-                        alt="Foto disco"
-                        width={384}
-                        height={320}
-                        className="w-full h-48 object-cover rounded-3xl cursor-pointer"
-                        onClick={() => openModal(photo)}
+                        alt={`Disco Row 1 ${idx}`}
+                        fill
+                        className="object-cover transition-transform duration-700"
+                        sizes="25vw"
+                        quality={100}
+                        unoptimized
                       />
                     </div>
                   ))}
                 </div>
 
-                {/* Desktop: Scroll infinito */}
-                <div className="hidden md:block">
-                  {/* Prima riga - scorre da sinistra a destra (L->R) */}
-                  {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
-                  <div className="flex overflow-visible">
-                    <div ref={row1Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                      {/* Original */}
-                      {discoPhotosRow1.map((photo, idx) => (
-                        <div key={`row1-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                          <Image
-                            src={photo}
-                            alt="Foto disco"
-                            width={384}
-                            height={320}
-                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                            style={{ display: 'block' }}
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            onClick={() => openModal(photo)}
-                          />
-                        </div>
-                      ))}
-                      {/* Duplicate for seamless loop */}
-                      {discoPhotosRow1.map((photo, idx) => (
-                        <div key={`row1-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                          <Image
-                            src={photo}
-                            alt="Foto disco"
-                            width={384}
-                            height={320}
-                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                            style={{ display: 'block' }}
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            onClick={() => openModal(photo)}
-                          />
-                        </div>
-                      ))}
+                {/* Row 2 - Right to Left */}
+                <div ref={row2Ref} className="flex gap-6 w-max will-change-transform ml-[-500px]">
+                  {[...discoPhotosRow2, ...discoPhotosRow2].map((photo, idx) => (
+                    <div
+                      key={`row2-${idx}`}
+                      className="relative w-[400px] h-[300px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-100 transition-all duration-500 hover:scale-105 hover:z-10"
+                      onClick={() => openModal(photo)}
+                    >
+                      <Image
+                        src={photo}
+                        alt={`Disco Row 2 ${idx}`}
+                        fill
+                        className="object-cover transition-transform duration-700"
+                        sizes="25vw"
+                        quality={100}
+                        unoptimized
+                      />
                     </div>
-                  </div>
-
-                  {/* Seconda riga - scorre da destra a sinistra (R->L) */}
-                  {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
-                  <div className="flex overflow-visible">
-                    <div ref={row2Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                      {/* Original */}
-                      {discoPhotosRow2.map((photo, idx) => (
-                        <div key={`row2-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                          <Image
-                            src={photo}
-                            alt="Foto disco"
-                            width={384}
-                            height={320}
-                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                            style={{ display: 'block' }}
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            onClick={() => openModal(photo)}
-                          />
-                        </div>
-                      ))}
-                      {/* Duplicate for seamless loop */}
-                      {discoPhotosRow2.map((photo, idx) => (
-                        <div key={`row2-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                          <Image
-                            src={photo}
-                            alt="Foto disco"
-                            width={384}
-                            height={320}
-                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                            style={{ display: 'block' }}
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            onClick={() => openModal(photo)}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </div >
-          </section >
+            </div>
 
-          {/* Descrizione attaccata ai reel, con marquee in mezzo */}
-          < div className="w-full relative" style={{ background: '#262626' }
-          }>
+            {/* Description */}
+            <div className="max-w-6xl mx-auto px-6 mt-24 text-center">
+              <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
+                Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica.
+                Realizzo servizi fotografici pensati per valorizzare l’evento e il locale, mostrando in modo chiaro e moderno ciò che il pubblico vive.
+              </p>
+            </div>
+
+          </section>
+
+          {/* Video Reel Section */}
+          <div className="w-full relative" style={{ background: '#262626' }}>
             <div className="max-w-6xl mx-auto px-6 pt-8 pb-2">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                 Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica. Realizzo servizi fotografici pensati per valorizzare l’evento e il locale, mostrando in modo chiaro e moderno ciò che il pubblico vive.
@@ -212,13 +162,14 @@ export default function DiscoSection() {
             {/* Scritta DISCO fissa, centrata, non scrollabile */}
             <div className="w-full flex justify-center pointer-events-none overflow-hidden mt-32 md:mt-20 z-10" style={{ position: 'relative', zIndex: 10, marginBottom: '-2rem', maxWidth: '100vw' }}>
               <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem', animation: 'none' }}>
-                DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO
+                <span className="lg:hidden">DISCO</span>
+                <span className="hidden lg:inline">DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO</span>
               </div>
             </div>
 
             {/* Reel subito sotto, senza spazio */}
             <VideoReelDisco />
-          </div >
+          </div>
 
           <div className="w-full relative" style={{ background: '#262626' }}>
             <div className="max-w-6xl mx-auto px-6  pt-8 pb-2">
@@ -227,11 +178,11 @@ export default function DiscoSection() {
               </p>
             </div>
           </div>
-        </div >
+        </div>
       )}
 
       {/* MOBILE VERSION */}
-      <div className="block md:hidden w-full bg-[#262626] py-12">
+      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
         {/* Title */}
         <div className="w-full flex justify-center mb-8">
           <h2 className="text-6xl font-black text-white uppercase tracking-tighter">
@@ -246,19 +197,21 @@ export default function DiscoSection() {
           </p>
         </div>
 
-        {/* Vertical Stack of Images (Selection) */}
-        <div className="flex flex-col gap-4 px-4">
-          {[...discoPhotosRow1, ...discoPhotosRow2].slice(0, 8).map((photo, idx) => (
-            <div key={`mobile-disco-${idx}`} className="w-full rounded-3xl overflow-hidden shadow-2xl cursor-pointer active:scale-95 transition-transform" onClick={() => openModal(photo)}>
-              <Image
-                src={photo}
-                alt={`Disco Mobile ${idx}`}
-                width={600}
-                height={500}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          ))}
+        {/* Horizontal Scroll Track (Parallax) */}
+        <div className="w-full overflow-visible">
+          <div ref={mobileTrackRef} className="flex gap-4 px-4 will-change-transform">
+            {[...discoPhotosRow1, ...discoPhotosRow2].map((photo, idx) => (
+              <div key={`mobile-disco-${idx}`} className="relative flex-shrink-0 w-[80vw] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl" onClick={() => openModal(photo)}>
+                <Image
+                  src={photo}
+                  alt={`Disco Mobile ${idx}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 80vw, 33vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Description 2 */}

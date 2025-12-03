@@ -1,28 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import LazyVideo from "./LazyVideo";
 
 export default function VideoReelAziende() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile on mount
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Hide video reels on mobile
-  if (isMobile) {
-    return null;
-  }
-
   return (
-    <section className="relative w-full min-h-screen bg-[#262626] flex items-center justify-center py-24 overflow-hidden">
+    <section className="hidden md:flex relative w-full min-h-screen bg-[#262626] items-center justify-center py-24 overflow-hidden">
       <div className="w-full max-w-[1800px] flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-8">
 
         {/* Video 1 */}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import LazyVideo from "./LazyVideo";
 
@@ -7,19 +7,8 @@ import LazyVideo from "./LazyVideo";
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
 
 export default function VideoReelDisco() {
-  const [isMobile, setIsMobile] = useState(false);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const rowRef = useRef<HTMLDivElement | null>(null);
-
-  // Detect mobile on mount
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Specific videos for the reel
   const videos = [
@@ -29,13 +18,8 @@ export default function VideoReelDisco() {
     { src: "/FOTO/VIDEO/Disco4.webm", poster: "/FOTO/FOTO DISCO/4.webp", type: "video/webm" },
   ];
 
-  // Hide video reels on mobile
-  if (isMobile) {
-    return null;
-  }
-
   return (
-    <section className="w-full bg-[#262626] py-12 overflow-hidden">
+    <section className="hidden md:block w-full bg-[#262626] py-12 overflow-hidden">
       <div className="w-full mx-0 px-0">
         {/* Title removed per request */}
 

@@ -46,7 +46,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 w-full h-full z-0">
         <LazyVideo
           src="/FOTO/VIDEO/videobg1.webm"
-          poster="/FOTO/AZIENDE/poster_hero.webp"
+          poster="/sfondobase.png"
           disableOnMobile={true}
           className="w-full h-full object-cover opacity-60"
         />

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
+import { useMobileParallax } from "../hooks/useMobileParallax";
 import LazyVideo from "./LazyVideo";
 
 export default function ConcertiSection() {
@@ -26,6 +27,11 @@ export default function ConcertiSection() {
     const [isMobile, setIsMobile] = useState(true);
     const row1Ref = useRef<HTMLDivElement>(null);
     const row2Ref = useRef<HTMLDivElement>(null);
+
+    // Mobile Parallax Refs
+    const mobileSectionRef = useRef<HTMLDivElement>(null);
+    const mobileTrackRef = useRef<HTMLDivElement>(null);
+
     const { openModal } = useImageModal();
 
     useEffect(() => {
@@ -35,36 +41,32 @@ export default function ConcertiSection() {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // Parallax Animation Logic (Desktop)
     useEffect(() => {
         if (isMobile) return;
 
-        let animationFrameId: number;
+        const handleScroll = () => {
+            if (!row1Ref.current || !row2Ref.current) return;
 
-        const animate = () => {
             const scrollY = window.scrollY;
-            const speed = 0.5; // Adjust speed
+            const speed1 = 0.3; // Row 1 speed
+            const speed2 = -0.3; // Row 2 speed (reverse direction)
 
-            // Row 1 (Top): Moves Left to Right (L->R)
-            if (row1Ref.current) {
-                const width = row1Ref.current.scrollWidth / 2;
-                const x = -width + (scrollY * speed) % width;
-                row1Ref.current.style.transform = `translateX(${x}px)`;
-            }
-
-            // Row 2 (Bottom): Moves Right to Left (R->L)
-            if (row2Ref.current) {
-                const width = row2Ref.current.scrollWidth / 2;
-                const x = -(scrollY * speed) % width;
-                row2Ref.current.style.transform = `translateX(${x}px)`;
-            }
-
-            animationFrameId = requestAnimationFrame(animate);
+            row1Ref.current.style.transform = `translateX(${scrollY * speed1}px)`;
+            row2Ref.current.style.transform = `translateX(${scrollY * speed2}px)`;
         };
 
-        animate();
-
-        return () => cancelAnimationFrame(animationFrameId);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
     }, [isMobile]);
+
+    // Mobile Parallax Animation
+    useMobileParallax({
+        sectionRef: mobileSectionRef,
+        trackRef: mobileTrackRef,
+        isMobile,
+        speed: 0.8
+    });
 
     return (
         <>
@@ -90,7 +92,7 @@ export default function ConcertiSection() {
                             <div className="absolute inset-0 w-full h-full z-0">
                                 <LazyVideo
                                     src="/FOTO/VIDEO/videobg1.webm"
-                                    poster="/FOTO/CONCERTI/1.webp"
+                                    poster="/sfondobase.png"
                                     disableOnMobile={true}
                                     className="w-full h-full object-cover"
                                 />
@@ -99,117 +101,60 @@ export default function ConcertiSection() {
                             {/* Griglia 2 righe di foto infinite */}
                             <div className="relative z-10 flex flex-col gap-4 mt-48 py-24">
 
-                                {/* Mobile: Griglia 2x2 statica */}
-                                <div className="md:hidden grid grid-cols-2 gap-4 px-4">
-                                    {images.slice(0, 4).map((photo, idx) => (
-                                        <div key={`mobile-${idx}`} className="relative rounded-3xl overflow-hidden">
+                                {/* Row 1 - Left to Right */}
+                                <div ref={row1Ref} className="flex gap-4 w-max will-change-transform">
+                                    {[...images, ...images].map((photo, idx) => (
+                                        <div
+                                            key={`row1-${idx}`}
+                                            className="relative w-[300px] h-[200px] md:w-[400px] md:h-[300px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-transform duration-300"
+                                            onClick={() => openModal(photo)}
+                                        >
                                             <Image
                                                 src={photo}
-                                                alt="Foto concerti"
-                                                width={384}
-                                                height={320}
-                                                className="w-full h-48 object-cover rounded-3xl cursor-pointer"
-                                                onClick={() => openModal(photo)}
+                                                alt={`Concerto ${idx}`}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 50vw, 25vw"
                                             />
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Desktop: Scroll infinito */}
-                                <div className="hidden md:block">
-                                    {/* Prima riga - scorre da sinistra a destra (L->R) */}
-                                    <div className="flex overflow-visible">
-                                        <div ref={row1Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                                            {/* Original Set */}
-                                            {images.map((photo, idx) => (
-                                                <div key={`row1-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                                                    <Image
-                                                        src={photo}
-                                                        alt="Foto concerti"
-                                                        width={384}
-                                                        height={320}
-                                                        className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                                                        style={{ display: 'block' }}
-                                                        sizes="(max-width: 768px) 50vw, 25vw"
-                                                        onClick={() => openModal(photo)}
-                                                    />
-                                                </div>
-                                            ))}
-                                            {/* Duplicate Set */}
-                                            {images.map((photo, idx) => (
-                                                <div key={`row1-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                                                    <Image
-                                                        src={photo}
-                                                        alt="Foto concerti"
-                                                        width={384}
-                                                        height={320}
-                                                        className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                                                        style={{ display: 'block' }}
-                                                        sizes="(max-width: 768px) 50vw, 25vw"
-                                                        onClick={() => openModal(photo)}
-                                                    />
-                                                </div>
-                                            ))}
+                                {/* Row 2 - Right to Left */}
+                                <div ref={row2Ref} className="flex gap-4 w-max will-change-transform ml-[-500px]">
+                                    {[...images, ...images].reverse().map((photo, idx) => (
+                                        <div
+                                            key={`row2-${idx}`}
+                                            className="relative w-[300px] h-[200px] md:w-[400px] md:h-[300px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-transform duration-300"
+                                            onClick={() => openModal(photo)}
+                                        >
+                                            <Image
+                                                src={photo}
+                                                alt={`Concerto ${idx}`}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 50vw, 25vw"
+                                            />
                                         </div>
-                                    </div>
-
-                                    {/* Seconda riga - scorre da destra a sinistra (R->L) */}
-                                    <div className="flex overflow-visible">
-                                        <div ref={row2Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                                            {/* Original Set */}
-                                            {images.map((photo, idx) => (
-                                                <div key={`row2-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                                                    <Image
-                                                        src={photo}
-                                                        alt="Foto concerti"
-                                                        width={384}
-                                                        height={320}
-                                                        className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                                                        style={{ display: 'block' }}
-                                                        sizes="(max-width: 768px) 50vw, 25vw"
-                                                        onClick={() => openModal(photo)}
-                                                    />
-                                                </div>
-                                            ))}
-                                            {/* Duplicate Set */}
-                                            {images.map((photo, idx) => (
-                                                <div key={`row2-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                                                    <Image
-                                                        src={photo}
-                                                        alt="Foto concerti"
-                                                        width={384}
-                                                        height={320}
-                                                        className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                                                        style={{ display: 'block' }}
-                                                        sizes="(max-width: 768px) 50vw, 25vw"
-                                                        onClick={() => openModal(photo)}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
-
-                        {/* Spazio vuoto */}
-                        <div className="w-full" style={{ height: '96px', zIndex: 10, position: 'relative' }} />
-                    </section >
+                    </section>
 
                     {/* Descrizione Desktop */}
-                    < div className="w-full relative" style={{ background: '#262626' }
-                    }>
+                    <div className="w-full relative bg-black">
                         <div className="max-w-6xl mx-auto px-6 py-12 text-center">
                             <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                                 Consegno foto e video potenti, sinceri e fedeli all’identità di chi sta sul palco. Un racconto autentico del live, da utilizzare per promozione, press kit, comunicazione social o ricordi del tour.
                             </p>
                         </div>
-                    </div >
-                </div >
+                    </div>
+                </div>
             )}
 
             {/* MOBILE VERSION */}
-            <div className="block md:hidden w-full bg-[#262626] py-12">
+            <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
                 {/* Title */}
                 <div className="w-full flex justify-center mb-8">
                     <h2 className="text-5xl font-black text-white uppercase tracking-tighter">
@@ -224,19 +169,21 @@ export default function ConcertiSection() {
                     </p>
                 </div>
 
-                {/* Vertical Stack of Images (Selection) */}
-                <div className="flex flex-col gap-4 px-4">
-                    {images.slice(0, 6).map((photo, idx) => (
-                        <div key={`mobile-concerti-${idx}`} className="w-full rounded-3xl overflow-hidden shadow-2xl cursor-pointer active:scale-95 transition-transform" onClick={() => openModal(photo)}>
-                            <Image
-                                src={photo}
-                                alt={`Concerti Mobile ${idx}`}
-                                width={600}
-                                height={500}
-                                className="w-full h-auto object-cover"
-                            />
-                        </div>
-                    ))}
+                {/* Horizontal Scroll Track (Parallax) */}
+                <div className="w-full overflow-visible">
+                    <div ref={mobileTrackRef} className="flex gap-4 px-4 will-change-transform">
+                        {images.map((photo, idx) => (
+                            <div key={`mobile-concerti-${idx}`} className="relative flex-shrink-0 w-[80vw] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl" onClick={() => openModal(photo)}>
+                                <Image
+                                    src={photo}
+                                    alt={`Concerti Mobile ${idx}`}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 80vw, 33vw"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Description Part 2 */}
