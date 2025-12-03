@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 interface UseMobileParallaxProps {
-    sectionRef: React.RefObject<HTMLDivElement>;
-    trackRef: React.RefObject<HTMLDivElement>;
+    sectionRef: React.RefObject<HTMLDivElement | null>;
+    trackRef: React.RefObject<HTMLDivElement | null>;
     isMobile: boolean;
     speed?: number;
 }
