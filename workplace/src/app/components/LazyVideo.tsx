@@ -57,8 +57,8 @@ export default function LazyVideo({
         const video = videoRef.current;
         if (!video) return;
 
-        // Se disableOnMobile è true e siamo su mobile, non caricare il video
-        if (disableOnMobile && isMobile) {
+        // Se siamo su mobile, non caricare mai il video
+        if (isMobile) {
             return;
         }
 
@@ -83,7 +83,19 @@ export default function LazyVideo({
             video.load(); // <--- Forza il browser a rilasciare la memoria
         }
 
-    }, [isIntersecting, src, disableOnMobile, isMobile]);
+    }, [isIntersecting, src, isMobile]);
+
+    // Su mobile, mostra sempre solo l'immagine statica
+    if (isMobile) {
+        return (
+            <img
+                src={poster || ''}
+                alt="Video poster"
+                className={className}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+        );
+    }
 
     return (
         <video

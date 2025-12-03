@@ -72,14 +72,14 @@ export default function Navbar() {
         style={{ top: '44px', height: 'calc(100vh - 44px)' }}
       >
         <div className="flex flex-col items-center gap-8 text-xl font-bold uppercase tracking-widest">
-          <Link href="#home" onClick={closeMenu} className="hover:text-neutral-400 transition">Home</Link>
-          <Link href="#servizi-discoteche" onClick={closeMenu} className="hover:text-neutral-400 transition">Servizi per Discoteche</Link>
-          <Link href="#concerti" onClick={closeMenu} className="hover:text-neutral-400 transition">Concerti</Link>
-          <Link href="#aziende" onClick={closeMenu} className="hover:text-neutral-400 transition">Aziende</Link>
-          <Link href="#immobiliare" onClick={closeMenu} className="hover:text-neutral-400 transition">Immobiliare</Link>
-          <Link href="#matrimoni" onClick={closeMenu} className="hover:text-neutral-400 transition">Matrimoni</Link>
-          <Link href="#merch" onClick={closeMenu} className="hover:text-neutral-400 transition">Merch</Link>
-          <Link href="#chi-sono" onClick={closeMenu} className="hover:text-neutral-400 transition">Chi Sono</Link>
+          <Link href="#home" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Home</Link>
+          <Link href="#servizi-discoteche" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Servizi per Discoteche</Link>
+          <Link href="#concerti" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Concerti</Link>
+          <Link href="#aziende" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Aziende</Link>
+          <Link href="#immobiliare" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Immobiliare</Link>
+          <Link href="#matrimoni" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Matrimoni</Link>
+          <Link href="#merch" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Merch</Link>
+          <Link href="#chi-sono" onClick={closeMenu} onTouchEnd={closeMenu} className="hover:text-neutral-400 transition">Chi Sono</Link>
         </div>
       </div>
     </div>
