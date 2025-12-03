@@ -104,77 +104,96 @@ export default function DiscoSection() {
               {/* Griglia 2 righe di foto infinite */}
               <div className="relative z-10 flex flex-col gap-4 mt-16 py-24">
 
-                {/* Prima riga - scorre da sinistra a destra (L->R) */}
-                {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
-                <div className="flex overflow-visible">
-                  <div ref={row1Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                    {/* Original */}
-                    {discoPhotosRow1.map((photo, idx) => (
-                      <div key={`row1-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                        <Image
-                          src={photo}
-                          alt="Foto disco"
-                          width={384}
-                          height={320}
-                          className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                          style={{ display: 'block' }}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          onClick={() => openModal(photo)}
-                        />
-                      </div>
-                    ))}
-                    {/* Duplicate for seamless loop */}
-                    {discoPhotosRow1.map((photo, idx) => (
-                      <div key={`row1-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                        <Image
-                          src={photo}
-                          alt="Foto disco"
-                          width={384}
-                          height={320}
-                          className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                          style={{ display: 'block' }}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          onClick={() => openModal(photo)}
-                        />
-                      </div>
-                    ))}
-                  </div>
+                {/* Mobile: Griglia 2x2 statica */}
+                <div className="md:hidden grid grid-cols-2 gap-4 px-4">
+                  {discoPhotosRow1.slice(0, 4).map((photo, idx) => (
+                    <div key={`mobile-${idx}`} className="relative rounded-3xl overflow-hidden">
+                      <Image
+                        src={photo}
+                        alt="Foto disco"
+                        width={384}
+                        height={320}
+                        className="w-full h-48 object-cover rounded-3xl cursor-pointer"
+                        onClick={() => openModal(photo)}
+                      />
+                    </div>
+                  ))}
                 </div>
 
-                {/* Seconda riga - scorre da destra a sinistra (R->L) */}
-                {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
-                <div className="flex overflow-visible">
-                  <div ref={row2Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                    {/* Original */}
-                    {discoPhotosRow2.map((photo, idx) => (
-                      <div key={`row2-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                        <Image
-                          src={photo}
-                          alt="Foto disco"
-                          width={384}
-                          height={320}
-                          className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                          style={{ display: 'block' }}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          onClick={() => openModal(photo)}
-                        />
-                      </div>
-                    ))}
-                    {/* Duplicate for seamless loop */}
-                    {discoPhotosRow2.map((photo, idx) => (
-                      <div key={`row2-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
-                        <Image
-                          src={photo}
-                          alt="Foto disco"
-                          width={384}
-                          height={320}
-                          className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
-                          style={{ display: 'block' }}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          onClick={() => openModal(photo)}
-                        />
-                      </div>
-                    ))}
+                {/* Desktop: Scroll infinito */}
+                <div className="hidden md:block">
+                  {/* Prima riga - scorre da sinistra a destra (L->R) */}
+                  {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
+                  <div className="flex overflow-visible">
+                    <div ref={row1Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+                      {/* Original */}
+                      {discoPhotosRow1.map((photo, idx) => (
+                        <div key={`row1-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
+                          <Image
+                            src={photo}
+                            alt="Foto disco"
+                            width={384}
+                            height={320}
+                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
+                            style={{ display: 'block' }}
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            onClick={() => openModal(photo)}
+                          />
+                        </div>
+                      ))}
+                      {/* Duplicate for seamless loop */}
+                      {discoPhotosRow1.map((photo, idx) => (
+                        <div key={`row1-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
+                          <Image
+                            src={photo}
+                            alt="Foto disco"
+                            width={384}
+                            height={320}
+                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
+                            style={{ display: 'block' }}
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            onClick={() => openModal(photo)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Seconda riga - scorre da destra a sinistra (R->L) */}
+                  {/* Changed overflow-hidden to overflow-visible to allow hover scale to pop out vertically */}
+                  <div className="flex overflow-visible">
+                    <div ref={row2Ref} className="flex flex-nowrap will-change-transform" style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+                      {/* Original */}
+                      {discoPhotosRow2.map((photo, idx) => (
+                        <div key={`row2-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
+                          <Image
+                            src={photo}
+                            alt="Foto disco"
+                            width={384}
+                            height={320}
+                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
+                            style={{ display: 'block' }}
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            onClick={() => openModal(photo)}
+                          />
+                        </div>
+                      ))}
+                      {/* Duplicate for seamless loop */}
+                      {discoPhotosRow2.map((photo, idx) => (
+                        <div key={`row2-dup-${idx}`} className="flex-shrink-0 mr-4 relative rounded-3xl transition-all duration-300 hover:scale-105 hover:z-50" style={{ transform: 'translateZ(0)' }}>
+                          <Image
+                            src={photo}
+                            alt="Foto disco"
+                            width={384}
+                            height={320}
+                            className="w-96 h-80 object-cover rounded-3xl cursor-pointer"
+                            style={{ display: 'block' }}
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            onClick={() => openModal(photo)}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
