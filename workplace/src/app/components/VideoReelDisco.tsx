@@ -8,6 +8,8 @@ import LazyVideo from "./LazyVideo";
 
 export default function VideoReelDisco() {
   const [isMobile, setIsMobile] = useState(false);
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const rowRef = useRef<HTMLDivElement | null>(null);
 
   // Detect mobile on mount
   useEffect(() => {
@@ -19,11 +21,6 @@ export default function VideoReelDisco() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Hide video reels on mobile
-  if (isMobile) {
-    return null;
-  }
-
   // Specific videos for the reel
   const videos = [
     { src: "/FOTO/VIDEO/Disco1.webm", poster: "/FOTO/FOTO DISCO/1.webp", type: "video/webm" },
@@ -31,9 +28,11 @@ export default function VideoReelDisco() {
     { src: "/FOTO/VIDEO/Disco3.webm", poster: "/FOTO/FOTO DISCO/3.webp", type: "video/webm" },
     { src: "/FOTO/VIDEO/Disco4.webm", poster: "/FOTO/FOTO DISCO/4.webp", type: "video/webm" },
   ];
-  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
 
-  const rowRef = useRef<HTMLDivElement | null>(null);
+  // Hide video reels on mobile
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <section className="w-full bg-[#262626] py-12 overflow-hidden">
