@@ -16,7 +16,7 @@ export default function InfoLegaliModal({ isOpen, onClose }: Props) {
                     <div className="bg-[#222] p-6 rounded-2xl border border-[#333]">
                         <h4 className="text-gray-500 text-sm font-bold uppercase mb-2">Contatti</h4>
                         <p className="text-white font-mono">
-                            Email: info@russostudios.it<br />
+                            Email: russostudioss@gmail.com<br />
                             PEC: russostudios@pec.it<br />
                             Tel: +39 06 12345678
                         </p>
