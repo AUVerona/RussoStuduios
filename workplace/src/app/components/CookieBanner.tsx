@@ -42,7 +42,7 @@ export default function CookieBanner() {
                                 Privacy & Cookie
                             </h2>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                Questo sito utilizza cookie tecnici e di tracciamento (Google Analytics) per migliorare l'esperienza.
+                                Questo sito utilizza cookie tecnici e di tracciamento (Google Analytics) per migliorare l&apos;esperienza.
                                 <a href="#" onClick={openPrivacy} className="text-white underline ml-2 hover:text-gray-300 transition-colors">
                                     Leggi la Policy
                                 </a>

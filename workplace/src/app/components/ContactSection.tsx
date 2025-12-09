@@ -39,7 +39,7 @@ export default function ContactSection() {
                 setStatus('error');
                 setErrorMessage(data.error || 'Qualcosa è andato storto.');
             }
-        } catch (error) {
+        } catch {
             setStatus('error');
             setErrorMessage('Errore di connessione. Riprova più tardi.');
         }
