@@ -13,8 +13,6 @@ const CookieConsentContext = createContext<CookieConsentContextType | undefined>
 
 export function CookieConsentProvider({ children }: { children: React.ReactNode }) {
     const [consent, setConsent] = useState<boolean | null>(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-
     useEffect(() => {
         // Check local storage on mount
         const storedConsent = localStorage.getItem('cookie_consent');
@@ -23,7 +21,6 @@ export function CookieConsentProvider({ children }: { children: React.ReactNode 
         } else if (storedConsent === 'false') {
             setConsent(false);
         }
-        setIsLoaded(true);
     }, []);
 
     const acceptCookies = () => {

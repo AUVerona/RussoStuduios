@@ -14,7 +14,7 @@ export default function CondizioniVenditaModal({ isOpen, onClose }: Props) {
 
                 <h3 className="text-xl font-bold text-white uppercase">1. Oggetto del Contratto</h3>
                 <p>
-                    Le presenti condizioni generali di vendita disciplinano l'acquisto dei servizi fotografici e video offerti da Russo Studios tramite il sito web o contatto diretto.
+                    Le presenti condizioni generali di vendita disciplinano l&apos;acquisto dei servizi fotografici e video offerti da Russo Studios tramite il sito web o contatto diretto.
                 </p>
 
                 <h3 className="text-xl font-bold text-white uppercase mt-6">2. Preventivi e Prezzi</h3>
@@ -34,7 +34,7 @@ export default function CondizioniVenditaModal({ isOpen, onClose }: Props) {
 
                 <h3 className="text-xl font-bold text-white uppercase mt-6">5. Recesso e Cancellazione</h3>
                 <p>
-                    In caso di cancellazione del servizio da parte del cliente, l'acconto versato potrebbe essere trattenuto a titolo di penale, secondo quanto stabilito nel contratto specifico.
+                    In caso di cancellazione del servizio da parte del cliente, l&apos;acconto versato potrebbe essere trattenuto a titolo di penale, secondo quanto stabilito nel contratto specifico.
                 </p>
             </div>
         </LegalModalLayout>

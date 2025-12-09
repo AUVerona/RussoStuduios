@@ -22,12 +22,12 @@ export default function GuideModal({ isOpen, onClose }: Props) {
 
                 <h4 className="text-lg font-bold text-white mt-6">2. Prenotazione Servizi</h4>
                 <p>
-                    Per prenotare un servizio, utilizza il modulo nella sezione "Contatti". Specifica il tipo di evento, la data e le tue esigenze particolari per ricevere un preventivo personalizzato.
+                    Per prenotare un servizio, utilizza il modulo nella sezione &quot;Contatti&quot;. Specifica il tipo di evento, la data e le tue esigenze particolari per ricevere un preventivo personalizzato.
                 </p>
 
                 <h4 className="text-lg font-bold text-white mt-6">3. Area Riservata (Coming Soon)</h4>
                 <p>
-                    Stiamo lavorando a un'area riservata dove i clienti potranno scaricare direttamente le foto e i video dei loro eventi. Resta sintonizzato per aggiornamenti.
+                    Stiamo lavorando a un&apos;area riservata dove i clienti potranno scaricare direttamente le foto e i video dei loro eventi. Resta sintonizzato per aggiornamenti.
                 </p>
             </div>
         </LegalModalLayout>

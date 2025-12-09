@@ -42,7 +42,7 @@ export default function InfoLegaliModal({ isOpen, onClose }: Props) {
                 </div>
 
                 <p className="text-sm text-gray-500 mt-8">
-                    Il sito è ospitato su server situati nell'Unione Europea.
+                    Il sito è ospitato su server situati nell&apos;Unione Europea.
                 </p>
             </div>
         </LegalModalLayout>

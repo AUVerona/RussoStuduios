@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 export default function MaintenancePage() {
   // Data di fine manutenzione fissa (esempio: 7 giorni da ora)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const MAINTENANCE_END = new Date("2025-12-01T00:00:00Z").getTime();
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
 
