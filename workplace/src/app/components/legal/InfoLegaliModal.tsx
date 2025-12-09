@@ -14,15 +14,6 @@ export default function InfoLegaliModal({ isOpen, onClose }: Props) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div className="bg-[#222] p-6 rounded-2xl border border-[#333]">
-                        <h4 className="text-gray-500 text-sm font-bold uppercase mb-2">Sede Legale</h4>
-                        <p className="text-white font-mono">
-                            Via Roma 123<br />
-                            00100 Roma (RM)<br />
-                            Italia
-                        </p>
-                    </div>
-
-                    <div className="bg-[#222] p-6 rounded-2xl border border-[#333]">
                         <h4 className="text-gray-500 text-sm font-bold uppercase mb-2">Contatti</h4>
                         <p className="text-white font-mono">
                             Email: info@russostudios.it<br />
