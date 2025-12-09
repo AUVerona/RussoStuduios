@@ -33,7 +33,7 @@ export default function AziendaliSection() {
           ========================================= */}
       {!isMobile && (
         <div className="hidden md:block">
-          <section className="relative w-full bg-[#262626] py-12 overflow-hidden">
+          <section className="relative w-full bg-black py-12 overflow-hidden">
             {/* Scritta AZIENDALI */}
             <div className="w-full flex justify-center pointer-events-none overflow-hidden" style={{ position: 'absolute', top: '32px', left: 0, zIndex: 30, marginTop: '0', maxWidth: '100vw', height: '96px' }}>
               <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem', animation: 'none', lineHeight: '96px' }}>
@@ -42,12 +42,14 @@ export default function AziendaliSection() {
             </div>
 
             {/* Video background */}
-            <LazyVideo
-              src="/FOTO/VIDEO/videobg1.webm"
-              poster="/sfondobase.png"
-              disableOnMobile={true}
-              className="absolute left-0 top-[120px] w-full h-[120vh] object-cover z-0"
-            />
+            <div className="absolute inset-0 w-full h-full z-0">
+              <LazyVideo
+                src="/FOTO/VIDEO/videobg1.webm"
+                poster="/sfondobase.png"
+                disableOnMobile={true}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
             <div className="relative w-full mx-0 px-0 z-30">
               {/* Spazio vuoto */}

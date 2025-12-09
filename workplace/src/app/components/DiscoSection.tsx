@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
 import { useMobileParallax } from "../hooks/useMobileParallax";
 import VideoReelDisco from "./VideoReelDisco";
+import LazyVideo from "./LazyVideo";
 
 // Prima riga - foto 1-9
 const discoPhotosRow1 = [
@@ -83,23 +84,30 @@ export default function DiscoSection() {
       {/* DESKTOP VERSION */}
       {!isMobile && (
         <div className="hidden md:block">
-          <section className="relative w-full bg-[#262626] py-32 overflow-hidden">
+          <section className="relative w-full bg-black py-32 overflow-hidden">
+            {/* Video di sfondo */}
+            <div className="absolute inset-0 w-full h-full z-0">
+              <LazyVideo
+                src="/FOTO/VIDEO/videobg1.webm"
+                poster="/sfondobase.png"
+                disableOnMobile={true}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
             {/* Scritta DISCO fissa */}
-            <div className="w-full flex justify-center pointer-events-none overflow-hidden mb-16">
+            <div className="relative z-10 w-full flex justify-center pointer-events-none overflow-hidden mb-16">
               <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem' }}>
-                <span className="lg:hidden">DISCO</span>
-                <span className="hidden lg:inline">DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO</span>
               </div>
             </div>
 
             {/* Wrapper per contenuto con overflow hidden */}
-            <div className="w-full overflow-hidden">
+            <div className="relative z-10 w-full overflow-hidden">
               <div className="flex flex-col gap-12">
 
                 {/* Row 1 - Left to Right */}
-                <div ref={row1Ref} className="flex gap-6 w-max will-change-transform">
-                  {[...discoPhotosRow1, ...discoPhotosRow1].map((photo, idx) => (
+                <div ref={row1Ref} className="flex gap-6 w-max will-change-transform ml-[-2000px]">
+                  {[...discoPhotosRow1, ...discoPhotosRow1, ...discoPhotosRow1, ...discoPhotosRow1].map((photo, idx) => (
                     <div
                       key={`row1-${idx}`}
                       className="relative w-[400px] h-[300px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-100 transition-all duration-500 hover:scale-105 hover:z-10"
@@ -120,7 +128,7 @@ export default function DiscoSection() {
 
                 {/* Row 2 - Right to Left */}
                 <div ref={row2Ref} className="flex gap-6 w-max will-change-transform ml-[-500px]">
-                  {[...discoPhotosRow2, ...discoPhotosRow2].map((photo, idx) => (
+                  {[...discoPhotosRow2, ...discoPhotosRow2, ...discoPhotosRow2, ...discoPhotosRow2].map((photo, idx) => (
                     <div
                       key={`row2-${idx}`}
                       className="relative w-[400px] h-[300px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-100 transition-all duration-500 hover:scale-105 hover:z-10"
@@ -141,34 +149,24 @@ export default function DiscoSection() {
               </div>
             </div>
 
-            {/* Description */}
-            <div className="max-w-6xl mx-auto px-6 mt-24 text-center">
+          </section>
+
+          {/* Description Section */}
+          <div className="w-full bg-[#262626] py-12 relative z-20">
+            <div className="max-w-6xl mx-auto px-6 text-center">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
                 Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica.
                 Realizzo servizi fotografici pensati per valorizzare l’evento e il locale, mostrando in modo chiaro e moderno ciò che il pubblico vive.
               </p>
             </div>
-
-          </section>
+          </div>
 
           {/* Video Reel Section */}
           <div className="w-full relative" style={{ background: '#262626' }}>
-            <div className="max-w-6xl mx-auto px-6 pt-8 pb-2">
-              <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
-                Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica. Realizzo servizi fotografici pensati per valorizzare l’evento e il locale, mostrando in modo chiaro e moderno ciò che il pubblico vive.
-              </p>
-            </div>
-
-            {/* Scritta DISCO fissa, centrata, non scrollabile */}
-            <div className="w-full flex justify-center pointer-events-none overflow-hidden mt-32 md:mt-20 z-10" style={{ position: 'relative', zIndex: 10, marginBottom: '-2rem', maxWidth: '100vw' }}>
-              <div className="whitespace-nowrap text-5xl md:text-8xl font-black text-white uppercase opacity-90 text-center" style={{ letterSpacing: '-0.1em', wordSpacing: '1rem', animation: 'none' }}>
-                <span className="lg:hidden">DISCO</span>
-                <span className="hidden lg:inline">DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO DISCO</span>
-              </div>
-            </div>
-
             {/* Reel subito sotto, senza spazio */}
-            <VideoReelDisco />
+            <div className="pt-20">
+              <VideoReelDisco />
+            </div>
           </div>
 
           <div className="w-full relative" style={{ background: '#262626' }}>

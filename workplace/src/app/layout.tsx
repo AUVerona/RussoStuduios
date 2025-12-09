@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import WhatsAppButton from "./components/WhatsAppButton";
-import Script from "next/script";
 import { ImageModalProvider } from "./context/ImageModalContext";
+import { CookieConsentProvider } from "./context/CookieConsentContext";
+import CookieBanner from "./components/CookieBanner";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Russo Studios | Foto & Video per Eventi, Aziende e Matrimoni",
@@ -29,8 +32,6 @@ export const metadata: Metadata = {
   creator: "Diego Russo",
 };
 
-import Footer from "./components/Footer";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,30 +40,19 @@ export default function RootLayout({
   return (
     <html lang="it">
       <head>
-        {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-RZNJ3V1211`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-        >
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-RZNJ3V1211');
-          `}
-        </Script>
+        {/* Google Analytics is now handled by the GoogleAnalytics component based on consent */}
       </head>
       <body className={`antialiased`}>
-        <ImageModalProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <WhatsAppButton />
-        </ImageModalProvider>
+        <CookieConsentProvider>
+          <ImageModalProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <WhatsAppButton />
+            <CookieBanner />
+            <GoogleAnalytics />
+          </ImageModalProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

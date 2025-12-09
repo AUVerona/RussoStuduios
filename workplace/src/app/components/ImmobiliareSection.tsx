@@ -35,7 +35,7 @@ export default function ImmobiliareSection() {
           ========================================= */}
             {!isMobile && (
                 <div className="hidden md:block">
-                    <section className="relative w-full bg-[#262626] py-12 overflow-hidden">
+                    <section className="relative w-full bg-black py-12 overflow-hidden">
 
                         {/* Scritta IMMOBILIARE */}
                         <div className="w-full flex justify-center pointer-events-none overflow-hidden" style={{ position: 'absolute', top: '32px', left: 0, zIndex: 30, marginTop: '0', maxWidth: '100vw', height: '96px' }}>
@@ -45,19 +45,22 @@ export default function ImmobiliareSection() {
                         </div>
 
                         {/* Video background */}
-                        <LazyVideo
-                            src="/FOTO/VIDEO/videobg1.webm"
-                            poster="/sfondobase.png"
-                            disableOnMobile={true}
-                            className="absolute left-0 top-[120px] w-full h-[120vh] object-cover z-0"
-                        />
+                        {/* Video background */}
+                        <div className="absolute inset-0 w-full h-full z-0">
+                            <LazyVideo
+                                src="/FOTO/VIDEO/videobg1.webm"
+                                poster="/sfondobase.png"
+                                disableOnMobile={true}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
 
                         <div className="relative w-full mx-0 px-0 z-30">
                             {/* Spazio vuoto */}
                             <div className="w-full" style={{ height: '300px', zIndex: 10, position: 'relative' }} />
 
                             {/* Bento Grid for Desktop */}
-                            <div className="grid grid-cols-4 grid-rows-2 gap-4 w-full max-w-7xl mx-auto px-4 h-[80vh]">
+                            <div className="grid grid-cols-4 grid-rows-2 gap-4 w-full max-w-5xl mx-auto px-4 h-[600px]">
                                 {images.map((img, idx) => {
                                     // Bento Grid Logic
                                     let gridClass = "";

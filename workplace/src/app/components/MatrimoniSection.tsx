@@ -102,7 +102,7 @@ export default function MatrimoniSection() {
       {/* DESKTOP VERSION */}
       {!isMobile && (
         <div className="hidden md:block">
-          <section ref={sectionRef} className="relative w-full bg-[#262626] py-32 overflow-x-clip overflow-y-visible">
+          <section ref={sectionRef} className="relative w-full bg-black py-32 overflow-x-clip overflow-y-visible">
 
             {/* Title */}
             <div className="w-full flex justify-center pointer-events-none overflow-hidden mb-16">
@@ -160,15 +160,17 @@ export default function MatrimoniSection() {
               </div>
             </div>
 
-            {/* Description */}
-            <div className="max-w-6xl mx-auto px-6 mt-24 text-center">
+          </section>
+
+          {/* Description Section */}
+          <div className="w-full bg-[#262626] py-12 relative z-20">
+            <div className="max-w-6xl mx-auto px-6 text-center">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
                 Il matrimonio è uno dei momenti più importanti nella vita di una coppia.
                 Lavoro in modo naturale, senza forzature, lasciando che siano le emozioni a guidare le immagini.
               </p>
             </div>
-
-          </section>
+          </div>
         </div>
       )}
 

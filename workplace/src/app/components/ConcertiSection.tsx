@@ -102,8 +102,8 @@ export default function ConcertiSection() {
                             <div className="relative z-10 flex flex-col gap-4 mt-48 py-24">
 
                                 {/* Row 1 - Left to Right */}
-                                <div ref={row1Ref} className="flex gap-4 w-max will-change-transform">
-                                    {[...images, ...images].map((photo, idx) => (
+                                <div ref={row1Ref} className="flex gap-4 w-max will-change-transform ml-[-2000px]">
+                                    {[...images, ...images, ...images, ...images].map((photo, idx) => (
                                         <div
                                             key={`row1-${idx}`}
                                             className="relative w-[300px] h-[200px] md:w-[400px] md:h-[300px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-transform duration-300"
@@ -122,7 +122,7 @@ export default function ConcertiSection() {
 
                                 {/* Row 2 - Right to Left */}
                                 <div ref={row2Ref} className="flex gap-4 w-max will-change-transform ml-[-500px]">
-                                    {[...images, ...images].reverse().map((photo, idx) => (
+                                    {[...images, ...images, ...images, ...images].reverse().map((photo, idx) => (
                                         <div
                                             key={`row2-${idx}`}
                                             className="relative w-[300px] h-[200px] md:w-[400px] md:h-[300px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-transform duration-300"
@@ -143,7 +143,7 @@ export default function ConcertiSection() {
                     </section>
 
                     {/* Descrizione Desktop */}
-                    <div className="w-full relative bg-black">
+                    <div className="w-full relative bg-[#262626]">
                         <div className="max-w-6xl mx-auto px-6 py-12 text-center">
                             <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                                 Consegno foto e video potenti, sinceri e fedeli all’identità di chi sta sul palco. Un racconto autentico del live, da utilizzare per promozione, press kit, comunicazione social o ricordi del tour.
