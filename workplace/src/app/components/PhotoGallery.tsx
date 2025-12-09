@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 const photos = [
   "/photo1.jpg",
@@ -38,11 +39,13 @@ export default function PhotoGallery() {
             </button>
           </div>
         </div>
-        <div className="flex-1 flex justify-center items-center">
-          <img
+        <div className="flex-1 flex justify-center items-center relative h-96 w-full">
+          <Image
             src={photos[current]}
             alt={`Foto ${current + 1}`}
-            className="rounded-2xl shadow-2xl object-cover w-full h-96 transition-all duration-700 animate-gallery"
+            fill
+            className="rounded-2xl shadow-2xl object-cover transition-all duration-700 animate-gallery"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>

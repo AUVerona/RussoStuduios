@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 const services = [
   {
@@ -69,14 +70,16 @@ export default function ServiceSlider() {
         </div>
         {/* Foto a destra, molto grande, con taglio diagonale sfumato */}
         <div className="flex-1 flex items-center justify-center h-full relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-100 pointer-events-none z-10" style={{clipPath: 'polygon(100% 0, 100% 100%, 0 100%, 20% 0)'}} />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-100 pointer-events-none z-10" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%, 20% 0)' }} />
           {hasPhotos && (
             <div className="w-full h-full flex items-center justify-center relative">
-              <img
+              <Image
                 src={service.folder + service.images[photoIdx]}
                 alt={service.title}
+                width={900}
+                height={700}
                 className="w-[900px] h-[700px] object-cover rounded-2xl shadow-2xl transition-all duration-500"
-                style={{clipPath: 'polygon(100% 0, 100% 100%, 0 100%, 20% 0)', objectFit: 'cover'}}
+                style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%, 20% 0)', objectFit: 'cover' }}
               />
               <button
                 onClick={prevPhoto}

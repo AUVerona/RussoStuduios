@@ -1,13 +1,11 @@
 "use client";
-import React, { useRef, useState } from "react";
-import Image from "next/image";
+import React, { useRef } from "react";
 import LazyVideo from "./LazyVideo";
 
 // Small grid of looping video reels used as background for each block.
 // Videos are currently placeholders (bgvideo1.mp4) located in /public/FOTO.
 
 export default function VideoReelDisco() {
-  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const rowRef = useRef<HTMLDivElement | null>(null);
 
   // Specific videos for the reel

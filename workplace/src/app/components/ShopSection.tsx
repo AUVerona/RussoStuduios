@@ -5,7 +5,6 @@ import Image from 'next/image';
 import LazyVideo from './LazyVideo';
 
 export default function ShopSection() {
-    const scrollRef = useRef<HTMLDivElement>(null);
 
     // Duplicate text for seamless scrolling
     const marqueeText = "RUSSOSTUDIOS | MERCH ".repeat(10);
