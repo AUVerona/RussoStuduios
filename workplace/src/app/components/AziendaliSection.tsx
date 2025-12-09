@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useImageModal } from "../context/ImageModalContext";
 import LazyVideo from "./LazyVideo";
@@ -12,8 +12,6 @@ export default function AziendaliSection() {
     "/FOTO/AZIENDE/4.webp",
   ];
 
-  const [bgLoaded, setBgLoaded] = useState(false);
-  const [bgError, setBgError] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
 
   const { openModal } = useImageModal();
