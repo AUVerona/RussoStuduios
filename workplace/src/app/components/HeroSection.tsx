@@ -43,7 +43,7 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
       {/* Video di sfondo */}
-      <div className="absolute inset-0 w-full h-full z-0">
+      <div className="absolute inset-0 w-full h-full z-0 hidden md:block">
         <LazyVideo
           src="/FOTO/VIDEO/videobg1.webm"
           poster="/sfondobase.png"
