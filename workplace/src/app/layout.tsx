@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Chatbot from "./components/Chatbot";
 import { ImageModalProvider } from "./context/ImageModalContext";
 import { CookieConsentProvider } from "./context/CookieConsentContext";
 import CookieBanner from "./components/CookieBanner";
@@ -49,6 +50,7 @@ export default function RootLayout({
             {children}
             <Footer />
             <WhatsAppButton />
+            <Chatbot />
             <CookieBanner />
             <GoogleAnalytics />
           </ImageModalProvider>
