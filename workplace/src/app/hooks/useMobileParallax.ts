@@ -22,7 +22,7 @@ export const useMobileParallax = ({
 
     // Inertia
     const velocity = useRef(0);
-    const animationFrame = useRef<number>();
+    const animationFrame = useRef<number | null>(null);
     const isScrolling = useRef<boolean | null>(null); // null: unknown, true: vertical, false: horizontal
 
     useEffect(() => {
