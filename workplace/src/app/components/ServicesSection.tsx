@@ -83,7 +83,7 @@ export default function ServicesSection() {
 
   return (
     <>
-      <section className="relative w-full bg-neutral-800 py-25">
+      <section className="relative w-full bg-black py-25">
         {/* Scritte infinite sopra (Scroll Driven) */}
         <div className="w-full overflow-hidden py-1 mb-4 flex">
           <div ref={topMarqueeRef} className="flex whitespace-nowrap will-change-transform">

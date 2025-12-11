@@ -15,9 +15,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[100]" style={{ background: '#262626' }}>
+    <div className="fixed top-0 left-0 w-full z-[100]" style={{ background: '#000000' }}>
       {/* Scritte scorrevoli sopra la navbar */}
-      <div className="w-full overflow-hidden" style={{ background: '#262626', height: '44px', display: 'flex', alignItems: 'center' }}>
+      <div className="w-full overflow-hidden" style={{ background: '#000000', height: '44px', display: 'flex', alignItems: 'center' }}>
         <div className="whitespace-nowrap animate-scroll-text animate-scroll-ultra text-white text-xl md:text-2xl font-extrabold tracking-widest uppercase" style={{ lineHeight: '44px' }}>
           {/* Duplicate the content to ensure a smooth continuous marquee */}
           <span aria-hidden>
@@ -31,7 +31,7 @@ export default function Navbar() {
       </div>
 
       {/* Navbar classica subito sotto */}
-      <nav className="w-full text-white h-20 md:h-28 flex items-center justify-between px-6 md:px-12 shadow-lg backdrop-blur-sm relative z-50" style={{ background: '#262626' }}>
+      <nav className="w-full text-white h-20 md:h-28 flex items-center justify-between px-6 md:px-12 shadow-lg backdrop-blur-sm relative z-50" style={{ background: '#000000' }}>
         <div className="flex items-center">
           <img src="/logorussostudios.png" alt="Russo Studios" className="h-8 md:h-12 w-auto mr-4 md:mr-8" />
         </div>
@@ -68,7 +68,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-[#262626] z-40 flex flex-col items-center justify-center transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} xl:hidden`}
+        className={`fixed inset-0 bg-[#000000] z-40 flex flex-col items-center justify-center transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} xl:hidden`}
         style={{ top: '44px', height: 'calc(100vh - 44px)' }}
       >
         <div className="flex flex-col items-center gap-8 text-xl font-bold uppercase tracking-widest">

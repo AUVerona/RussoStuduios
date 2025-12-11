@@ -163,7 +163,7 @@ export default function MatrimoniSection() {
           </section>
 
           {/* Description Section */}
-          <div className="w-full bg-[#262626] py-12 relative z-20">
+          <div className="w-full bg-[#000000] py-12 relative z-20">
             <div className="max-w-6xl mx-auto px-6 text-center">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
                 Il matrimonio è uno dei momenti più importanti nella vita di una coppia.
@@ -175,7 +175,7 @@ export default function MatrimoniSection() {
       )}
 
       {/* MOBILE VERSION */}
-      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
+      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#000000] py-12 overflow-hidden">
         {/* Title */}
         <div className="w-full flex justify-center mb-8">
           <h2 className="text-5xl font-black text-white uppercase tracking-tighter">

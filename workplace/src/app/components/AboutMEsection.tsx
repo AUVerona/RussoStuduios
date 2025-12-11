@@ -8,7 +8,7 @@ export default function AboutMEsection() {
     const marqueeText = "RUSSOSTUDIOS ".repeat(10);
 
     return (
-        <section className="relative w-full min-h-screen bg-[#262626] text-white flex flex-col justify-between py-10 overflow-hidden">
+        <section className="relative w-full min-h-screen bg-[#000000] text-white flex flex-col justify-between py-10 overflow-hidden">
 
             {/* Scrolling Text Top */}
             <div className="w-full overflow-hidden relative z-10">

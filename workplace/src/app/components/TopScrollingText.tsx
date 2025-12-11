@@ -5,7 +5,7 @@ export default function TopScrollingText() {
     <div
       className="w-full overflow-hidden"
       style={{
-        background: '#262626',
+        background: '#000000',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -13,7 +13,7 @@ export default function TopScrollingText() {
         pointerEvents: 'none',
       }}
     >
-      <div className="whitespace-nowrap animate-scroll-text text-white text-lg font-light tracking-widest uppercase py-2" style={{pointerEvents: 'auto'}}>
+      <div className="whitespace-nowrap animate-scroll-text text-white text-lg font-light tracking-widest uppercase py-2" style={{ pointerEvents: 'auto' }}>
         Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista
       </div>
       <style jsx>{`

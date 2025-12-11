@@ -98,7 +98,7 @@ export default function ImmobiliareSection() {
                     </section>
 
                     {/* Descrizione Desktop */}
-                    <div className="w-full relative" style={{ background: '#262626' }}>
+                    <div className="w-full relative" style={{ background: '#000000' }}>
                         <div className="max-w-6xl mx-auto px-6 py-12 text-center">
                             <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                                 Ogni spazio ha un carattere, un’atmosfera, una storia da raccontare.
@@ -114,7 +114,7 @@ export default function ImmobiliareSection() {
             {/* =========================================
           MOBILE VERSION (Hidden on desktop)
           ========================================= */}
-            <div className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
+            <div className="block md:hidden w-full bg-[#000000] py-12 overflow-hidden">
                 {/* Title */}
                 <div className="w-full flex justify-center mb-8">
                     <h2 className="text-5xl font-black text-white uppercase tracking-tighter">

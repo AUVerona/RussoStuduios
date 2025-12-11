@@ -17,7 +17,7 @@ export default function VideoReelDisco() {
   ];
 
   return (
-    <section className="hidden md:block w-full bg-[#262626] py-12 overflow-hidden">
+    <section className="hidden md:block w-full bg-[#000000] py-12 overflow-hidden">
       <div className="w-full mx-0 px-0">
         {/* Title removed per request */}
 

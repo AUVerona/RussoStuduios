@@ -77,7 +77,7 @@ export default function ConcertiSection() {
                     {/* Sezione principale */}
                     <section className="relative min-h-screen w-full overflow-hidden bg-black">
                         {/* Rettangolo grigio in alto */}
-                        <div className="w-full h-[60px] bg-[#262626] relative z-50"></div>
+                        <div className="w-full h-[60px] bg-[#000000] relative z-50"></div>
 
                         {/* Scritta CONCERTI fissa */}
                         <div className="absolute top-0 left-0 w-full z-50 flex justify-center pointer-events-none mt-4" style={{ maxWidth: '100vw' }}>
@@ -143,7 +143,7 @@ export default function ConcertiSection() {
                     </section>
 
                     {/* Descrizione Desktop */}
-                    <div className="w-full relative bg-[#262626]">
+                    <div className="w-full relative bg-[#000000]">
                         <div className="max-w-6xl mx-auto px-6 py-12 text-center">
                             <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                                 Consegno foto e video potenti, sinceri e fedeli all’identità di chi sta sul palco. Un racconto autentico del live, da utilizzare per promozione, press kit, comunicazione social o ricordi del tour.
@@ -154,7 +154,7 @@ export default function ConcertiSection() {
             )}
 
             {/* MOBILE VERSION */}
-            <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
+            <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#000000] py-12 overflow-hidden">
                 {/* Title */}
                 <div className="w-full flex justify-center mb-8">
                     <h2 className="text-5xl font-black text-white uppercase tracking-tighter">

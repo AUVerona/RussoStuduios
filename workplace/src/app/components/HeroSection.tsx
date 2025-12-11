@@ -43,7 +43,7 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
       {/* Video di sfondo */}
-      <div className="absolute inset-0 w-full h-full z-0 hidden md:block">
+      <div className="absolute inset-0 w-full h-full z-0">
         <LazyVideo
           src="/FOTO/VIDEO/videobg1.webm"
           poster="/sfondobase.png"
@@ -55,7 +55,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scritte scorrevoli in alto */}
-      <div className="absolute top-24 left-0 w-full overflow-hidden z-20" style={{ background: '#262626' }}>
+      <div className="absolute top-24 left-0 w-full overflow-hidden z-20" style={{ background: '#000000' }}>
         <div className="whitespace-nowrap animate-scroll-text text-white text-lg font-light tracking-widest uppercase">
           Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista · Fotografo · Videomaker · Dronista
         </div>
@@ -75,7 +75,7 @@ export default function HeroSection() {
 
       {/* RUSSOSTUDIOS© in basso con sfondo nero e movimento scroll infinito */}
       <div className="absolute bottom-0 left-0 w-full pt-0 pb-0 overflow-hidden z-20">
-        <div style={{ background: '#262626', width: '100%', padding: 0, margin: 0, position: 'relative' }}>
+        <div style={{ background: '#000000', width: '100%', padding: 0, margin: 0, position: 'relative' }}>
           <div className="flex whitespace-nowrap overflow-hidden">
             {/* Container for the moving text */}
             <div ref={marqueeRef} className="flex whitespace-nowrap will-change-transform">

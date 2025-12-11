@@ -10,7 +10,7 @@ export default function ShopSection() {
     const marqueeText = "RUSSOSTUDIOS | MERCH ".repeat(10);
 
     return (
-        <section className="relative w-full min-h-screen bg-[#262626] text-white flex flex-col items-center py-20 overflow-hidden z-30">
+        <section className="relative w-full min-h-screen bg-[#000000] text-white flex flex-col items-center py-20 overflow-hidden z-30">
 
             {/* Background Video */}
             <div className="absolute inset-0 w-full h-full z-0">
@@ -24,9 +24,9 @@ export default function ShopSection() {
             </div>
 
             {/* Gray Rectangle at Top */}
-            <div className="absolute top-0 left-0 w-full h-80 bg-[#262626] z-[5]"></div>
+            <div className="absolute top-0 left-0 w-full h-80 bg-[#000000] z-[5]"></div>
             {/* Gray Rectangle at Bottom */}
-            <div className="absolute bottom-0 left-0 w-full h-40 bg-[#262626] z-[5]"></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-[#000000] z-[5]"></div>
 
             {/* Scrolling Text Top */}
             <div className="w-full overflow-hidden mb-16 relative z-10">

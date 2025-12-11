@@ -4,7 +4,7 @@ import LazyVideo from './LazyVideo';
 
 export default function MerchSection() {
     return (
-        <section className="relative w-full min-h-screen bg-[#262626] flex flex-col items-center justify-center py-20 z-50">
+        <section className="relative w-full min-h-screen bg-[#000000] flex flex-col items-center justify-center py-20 z-50">
 
             {/* Rotated Video Strip Container */}
             {/* The container is rotated, creating the 'frame' effect requested */}

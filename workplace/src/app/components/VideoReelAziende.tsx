@@ -4,7 +4,7 @@ import LazyVideo from "./LazyVideo";
 
 export default function VideoReelAziende() {
   return (
-    <section className="hidden md:flex relative w-full min-h-screen bg-[#262626] items-center justify-center py-24 overflow-hidden">
+    <section className="hidden md:flex relative w-full min-h-screen bg-[#000000] items-center justify-center py-24 overflow-hidden">
       <div className="w-full max-w-[1800px] flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-8">
 
         {/* Video 1 */}

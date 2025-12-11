@@ -152,7 +152,7 @@ export default function DiscoSection() {
           </section>
 
           {/* Description Section */}
-          <div className="w-full bg-[#262626] py-12 relative z-20">
+          <div className="w-full bg-[#000000] py-12 relative z-20">
             <div className="max-w-6xl mx-auto px-6 text-center">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight drop-shadow-md">
                 Raccontare una serata significa catturare l’atmosfera, l’energia e ogni dettaglio che la rende unica.
@@ -162,14 +162,14 @@ export default function DiscoSection() {
           </div>
 
           {/* Video Reel Section */}
-          <div className="w-full relative" style={{ background: '#262626' }}>
+          <div className="w-full relative" style={{ background: '#000000' }}>
             {/* Reel subito sotto, senza spazio */}
             <div className="pt-20">
               <VideoReelDisco />
             </div>
           </div>
 
-          <div className="w-full relative" style={{ background: '#262626' }}>
+          <div className="w-full relative" style={{ background: '#000000' }}>
             <div className="max-w-6xl mx-auto px-6  pt-8 pb-2">
               <p className="text-white text-lg font-semibold uppercase tracking-tight leading-tight">
                 Affianco alle foto anche video in stile reel, ideali per i social: dinamici, creativi e studiati per promuovere la serata, aumentare la visibilità del club e attirare nuovo pubblico. Che si tratti di un evento speciale, un DJ set o una stagione intera, il mio obiettivo è creare un racconto completo e sincero, capace di far rivivere ogni attimo, ogni sguardo e ogni emozione esattamente per come sono stati vissuti.
@@ -180,7 +180,7 @@ export default function DiscoSection() {
       )}
 
       {/* MOBILE VERSION */}
-      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#262626] py-12 overflow-hidden">
+      <div ref={mobileSectionRef} className="block md:hidden w-full bg-[#000000] py-12 overflow-hidden">
         {/* Title */}
         <div className="w-full flex justify-center mb-8">
           <h2 className="text-6xl font-black text-white uppercase tracking-tighter">
